@@ -1239,13 +1239,10 @@ function setCatChecks(cats) {
   });
 }
 
-// 체크박스 클릭 시 스타일 토글
-document.querySelectorAll('.cat-check').forEach(label => {
-  label.addEventListener('click', () => {
-    setTimeout(() => {
-      const cb = label.querySelector('input');
-      label.classList.toggle('checked', cb.checked);
-    }, 0);
+// 체크박스 클릭 시 스타일 토글 — input change 이벤트로 처리 (label 이중 발화 방지)
+document.querySelectorAll('#ef-cat-checks input').forEach(cb => {
+  cb.addEventListener('change', () => {
+    cb.closest('.cat-check').classList.toggle('checked', cb.checked);
   });
 });
 
@@ -1513,15 +1510,23 @@ function showToast(msg) {
 }
 
 // 편집 모드 ON일 때만 시트 저장 버튼 표시
-document.getElementById('edit-toggle').addEventListener('click', () => {
+document.getElementById('edit-toggle').addEventListener('click', async () => {
   editMode = !editMode;
   const btn = document.getElementById('edit-toggle');
   btn.textContent = editMode ? '✅ 편집 모드 ON' : '✏️ 편집 모드';
   btn.classList.toggle('edit-on', editMode);
   document.getElementById('sheet-save-btn').style.display = editMode ? 'block' : 'none';
-  document.getElementById('panel-actions').style.display =
-    (editMode && currentId) ? 'flex' : 'none';
-  render();
+  document.getElementById('panel').classList.remove('open');
+  document.getElementById('panel-actions').style.display = 'none';
+
+  if (!editMode) {
+    // 편집 모드 OFF 시 자동 저장 후 시트 데이터 다시 불러오기
+    showToast('☁️ 변경사항을 시트에 저장하는 중...');
+    await saveToSheet();
+    await loadFromSheet();
+  } else {
+    render();
+  }
 });
 
 document.getElementById('sheet-save-btn').addEventListener('click', saveToSheet);
