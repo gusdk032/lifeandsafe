@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>대한민국 생명안전의제 운동 타임라인 1994–2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 /* ───────────────────────────────────────────────
    기본 리셋 & 변수
@@ -12,7 +12,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --serif: 'Noto Serif KR', Georgia, serif;
+  --serif: 'Noto Sans KR', sans-serif;
   --sans:  'Noto Sans KR', sans-serif;
   --black: #0d0d0d;
   --gray1: #333;
@@ -317,8 +317,13 @@ body {
   font-size: 11px;
   color: var(--gray2);
   line-height: 1.65;
-  padding: 2px 4px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background .1s;
 }
+.ev-snippet:hover { background: var(--gray6); color: var(--black); }
+.ev-snippet .snippet-more { font-size: 10px; color: var(--gray3); margin-top: 3px; display: block; }
 
 /* 편집모드 추가 버튼 */
 .add-btn {
@@ -556,6 +561,42 @@ body {
 }
 .add-link-btn:hover { border-color: var(--black); color: var(--black); }
 
+/* 연관 자료 */
+.ref-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 6px; }
+.ref-item {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 12px; padding: 7px 10px;
+  border: 1px solid var(--gray5); border-radius: 4px;
+  text-decoration: none; color: var(--black);
+  transition: all .1s;
+}
+.ref-item:hover { border-color: var(--gray3); background: var(--gray6); }
+.ref-item .ref-icon { font-size: 14px; flex-shrink: 0; }
+.ref-item .ref-label { flex: 1; }
+.ref-item .ref-del {
+  font-size: 10px; background: none; border: none;
+  cursor: pointer; color: var(--gray3); padding: 2px 4px;
+  display: none;
+}
+.ref-item:hover .ref-del { display: block; }
+.ref-item .ref-del:hover { color: #e74c3c; }
+.ref-type-label {
+  font-size: 10px; font-weight: 700; color: var(--gray3);
+  letter-spacing: .06em; margin-bottom: 4px; display: block;
+}
+.add-ref-btn {
+  font-family: var(--sans); font-size: 11px;
+  background: none; border: 1.5px dashed var(--gray4);
+  border-radius: 4px; padding: 6px 10px;
+  cursor: pointer; color: var(--gray2);
+  transition: all .1s; margin-bottom: 4px; text-align: left;
+}
+.add-ref-btn:hover { border-color: var(--black); color: var(--black); }
+.ref-form-inner {
+  background: var(--gray6); border-radius: 6px;
+  padding: 12px; border: 1px solid var(--gray5);
+}
+
 .save-btn {
   font-family: var(--sans);
   font-size: 14px;
@@ -581,6 +622,29 @@ body {
   transition: all .1s;
 }
 .cancel-btn:hover { border-color: var(--black); }
+
+/* 카테고리 체크박스 */
+.cat-checks { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.cat-check {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 12px; color: var(--gray1); cursor: pointer;
+  padding: 5px 10px; border: 1.5px solid var(--gray4);
+  border-radius: 20px; transition: all .1s; user-select: none;
+}
+.cat-check:hover { border-color: var(--black); }
+.cat-check input { display: none; }
+.cat-check.checked { background: var(--black); color: var(--white); border-color: var(--black); }
+
+/* 카테고리 태그 (패널·카드) */
+.cat-tag {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  padding: 2px 8px; border-radius: 10px; margin-right: 4px; margin-bottom: 2px;
+}
+.cat-tag.세월호  { background: #fff3cd; color: #856404; }
+.cat-tag.재난    { background: #fde8e4; color: var(--red); }
+.cat-tag.산업재해 { background: #fef3e2; color: var(--orange); }
+.cat-tag.운동    { background: #f0f0f0; color: var(--slate); }
+.cat-tag.입법    { background: #e8f0fe; color: var(--blue); }
 
 /* ───────────────────────────────────────────────
    반응형
@@ -623,6 +687,7 @@ body {
     </div>
     <div class="filter-group">
       <button class="fbtn on" data-f="전체">전체</button>
+      <button class="fbtn" data-f="세월호">세월호</button>
       <button class="fbtn" data-f="재난">재난</button>
       <button class="fbtn" data-f="산업재해">산업재해</button>
       <button class="fbtn" data-f="운동/조직">운동·조직</button>
@@ -638,6 +703,7 @@ body {
   <div class="stats-bar">
     <div class="stat-item"><span class="stat-n" id="st-total">0</span><span class="stat-l">전체 사건</span></div>
     <div class="stat-item"><span class="stat-n" id="st-show">0</span><span class="stat-l">표시 중</span></div>
+    <div class="stat-item"><span class="stat-n" id="st-세월호">0</span><span class="stat-l">세월호</span></div>
     <div class="stat-item"><span class="stat-n" id="st-재난">0</span><span class="stat-l">재난</span></div>
     <div class="stat-item"><span class="stat-n" id="st-산업재해">0</span><span class="stat-l">산업재해</span></div>
     <div class="stat-item"><span class="stat-n" id="st-운동">0</span><span class="stat-l">운동·조직</span></div>
@@ -680,16 +746,27 @@ body {
     <div class="p-section"><div class="p-label">시민사회 대응·담론</div><div class="p-text" id="ps"></div></div>
     <div class="p-section"><div class="p-label">결과·입법</div><div class="p-text" id="pr"></div></div>
     <div class="p-section" id="pl-sec">
-      <div class="p-label">관련 자료</div>
-      <div id="pl"></div>
-    </div>
-    <div class="p-section">
-      <div class="p-label">연관 사건</div>
-      <div class="related-tags" id="prt"></div>
+      <div class="p-label">연관 자료</div>
+      <div class="ref-group" id="pl-articles"></div>
+      <div class="ref-group" id="pl-docs"></div>
+      <button class="add-ref-btn" id="add-article-btn" style="display:none;">📰 + 관련 기사 추가</button>
+      <button class="add-ref-btn" id="add-doc-btn" style="display:none;">📄 + 관련 자료집 추가</button>
     </div>
     <div class="panel-actions" id="panel-actions" style="display:none;">
       <button class="edit-action-btn" id="edit-this-btn">수정하기</button>
       <button class="edit-action-btn danger" id="del-this-btn">삭제</button>
+    </div>
+    <!-- 자료 입력 미니폼 -->
+    <div id="ref-form" style="display:none;">
+      <div class="ref-form-inner">
+        <div class="p-label" id="ref-form-title">기사 추가</div>
+        <input class="ef-input" id="ref-label" placeholder="제목을 입력하세요" style="margin:8px 0 6px;">
+        <input class="ef-input" id="ref-url" placeholder="https://... 링크를 입력하세요" style="margin-bottom:8px;">
+        <div style="display:flex;gap:6px;">
+          <button class="save-btn" id="ref-save-btn" style="font-size:12px;padding:7px;">저장</button>
+          <button class="cancel-btn" id="ref-cancel-btn" style="font-size:12px;padding:7px;">취소</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -711,13 +788,14 @@ body {
         <input class="ef-input" id="ef-title" placeholder="사건 이름을 입력하세요">
       </div>
       <div class="ef-row">
-        <label class="ef-label">카테고리</label>
-        <select class="ef-select" id="ef-cat">
-          <option value="재난">재난</option>
-          <option value="산업재해">산업재해</option>
-          <option value="운동/조직">운동·조직</option>
-          <option value="입법/정책">입법·정책</option>
-        </select>
+        <label class="ef-label">카테고리 (복수 선택 가능)</label>
+        <div class="cat-checks" id="ef-cat-checks">
+          <label class="cat-check"><input type="checkbox" value="세월호"> 세월호</label>
+          <label class="cat-check"><input type="checkbox" value="재난"> 재난</label>
+          <label class="cat-check"><input type="checkbox" value="산업재해"> 산업재해</label>
+          <label class="cat-check"><input type="checkbox" value="운동/조직"> 운동·조직</label>
+          <label class="cat-check"><input type="checkbox" value="입법/정책"> 입법·정책</label>
+        </div>
       </div>
       <div class="ef-row">
         <label class="ef-label">배경 및 경과</label>
@@ -736,14 +814,14 @@ body {
         <textarea class="ef-textarea" id="ef-result" rows="3" placeholder="결과 및 입법 내용을 입력하세요"></textarea>
       </div>
       <div class="ef-row">
-        <label class="ef-label">관련 자료 링크</label>
-        <div id="ef-links-wrap"></div>
-        <button type="button" class="add-link-btn" id="add-link-btn">+ 링크 추가</button>
+        <label class="ef-label">📰 관련 기사</label>
+        <div id="ef-articles-wrap"></div>
+        <button type="button" class="add-link-btn" id="add-article-field-btn">+ 기사 추가</button>
       </div>
       <div class="ef-row">
-        <label class="ef-label">연관 사건 ID (쉼표로 구분)</label>
-        <input class="ef-input" id="ef-related" placeholder="2014-세월호, 2022-이태원">
-        <small style="font-size:10px;color:var(--gray3);margin-top:3px;">사건 ID는 "연도-이름" 형식입니다 (예: 2018-김용균)</small>
+        <label class="ef-label">📄 관련 자료집</label>
+        <div id="ef-docs-wrap"></div>
+        <button type="button" class="add-link-btn" id="add-doc-field-btn">+ 자료집 추가</button>
       </div>
       <button type="button" class="save-btn" id="save-btn">저장하기</button>
       <button type="button" class="cancel-btn" id="cancel-edit-btn">취소</button>
@@ -810,14 +888,33 @@ const CONNS = [
 // ─────────────────────────────────────────────
 // 앱 로직
 // ─────────────────────────────────────────────
-const CAT_CLS = {'재난':'재난','산업재해':'산업재해','운동/조직':'운동','입법/정책':'입법'};
+// cat 은 이제 배열 (예: ["세월호","재난","입법/정책"])
+// 기존 문자열 cat은 마이그레이션에서 배열로 변환됨
+
+const ALL_CATS = ['세월호','재난','산업재해','운동/조직','입법/정책'];
+// 도트 색상: 첫 번째 cat 기준
+const CAT_DOT_CLS = {'세월호':'세월호','재난':'재난','산업재해':'산업재해','운동/조직':'운동','입법/정책':'입법'};
+
 let activeFilter = '전체', searchQ = '', editMode = false, currentId = null, editingId = null;
 
-function dotClass(cat) { return CAT_CLS[cat] || '운동'; }
+function getCats(e) {
+  // cat이 배열이면 그대로, 문자열이면 배열로
+  if (Array.isArray(e.cat)) return e.cat;
+  if (e.cat) return [e.cat];
+  return [];
+}
+
+function dotClass(e) {
+  const cats = getCats(e);
+  // 세월호 제외 첫 번째 카테고리로 색상 결정 (세월호만 있으면 세월호)
+  const main = cats.find(c => c !== '세월호') || cats[0] || '재난';
+  return CAT_DOT_CLS[main] || '재난';
+}
 
 function getFiltered() {
   return EVENTS.filter(e => {
-    const mc = activeFilter === '전체' || e.cat === activeFilter;
+    const cats = getCats(e);
+    const mc = activeFilter === '전체' || cats.includes(activeFilter);
     const ms = !searchQ || [e.title,e.event,e.issue,e.civil,e.result].some(t => t && t.includes(searchQ));
     return mc && ms;
   });
@@ -827,10 +924,11 @@ function updateStats() {
   const f = getFiltered();
   document.getElementById('st-total').textContent = EVENTS.length;
   document.getElementById('st-show').textContent = f.length;
-  document.getElementById('st-재난').textContent = EVENTS.filter(e=>e.cat==='재난').length;
-  document.getElementById('st-산업재해').textContent = EVENTS.filter(e=>e.cat==='산업재해').length;
-  document.getElementById('st-운동').textContent = EVENTS.filter(e=>e.cat==='운동/조직').length;
-  document.getElementById('st-입법').textContent = EVENTS.filter(e=>e.cat==='입법/정책').length;
+  document.getElementById('st-세월호').textContent = EVENTS.filter(e=>getCats(e).includes('세월호')).length;
+  document.getElementById('st-재난').textContent = EVENTS.filter(e=>getCats(e).includes('재난')).length;
+  document.getElementById('st-산업재해').textContent = EVENTS.filter(e=>getCats(e).includes('산업재해')).length;
+  document.getElementById('st-운동').textContent = EVENTS.filter(e=>getCats(e).includes('운동/조직')).length;
+  document.getElementById('st-입법').textContent = EVENTS.filter(e=>getCats(e).includes('입법/정책')).length;
 }
 
 function render() {
@@ -857,7 +955,10 @@ function render() {
       const row = document.createElement('div');
       row.className = 'ev-row';
       const isLast = ei === byYear[yr].length - 1;
-      const dc = dotClass(e.cat);
+      const dc = dotClass(e);
+      const catTags = getCats(e).map(c =>
+        `<span class="cat-tag ${c.replace('/','')}">${c}</span>`
+      ).join('');
       row.innerHTML = `
         <div class="yr-dot-col">
           <div class="dot ${dc}"></div>
@@ -866,13 +967,14 @@ function render() {
         <div class="ev-cell">
           <div class="ev-main ${dc}" data-id="${e.id}">
             <div class="ev-title">${e.title}</div>
+            <div style="margin:3px 0 4px;">${catTags}</div>
             <div class="ev-date">${e.date}</div>
             <div class="ev-more">▶ 자세히 보기</div>
           </div>
         </div>
-        <div class="ev-cell"><div class="ev-snippet">${trim(e.issue,72)}</div></div>
-        <div class="ev-cell"><div class="ev-snippet">${trim(e.civil,72)}</div></div>
-        <div class="ev-cell"><div class="ev-snippet">${trim(e.result,72)}</div></div>`;
+        <div class="ev-cell"><div class="ev-snippet" data-id="${e.id}" data-focus="issue">${trim(e.issue,72)}${e.issue&&e.issue.length>72?'<span class="snippet-more">▶ 전체 보기</span>':''}</div></div>
+        <div class="ev-cell"><div class="ev-snippet" data-id="${e.id}" data-focus="civil">${trim(e.civil,72)}${e.civil&&e.civil.length>72?'<span class="snippet-more">▶ 전체 보기</span>':''}</div></div>
+        <div class="ev-cell"><div class="ev-snippet" data-id="${e.id}" data-focus="result">${trim(e.result,72)}${e.result&&e.result.length>72?'<span class="snippet-more">▶ 전체 보기</span>':''}</div></div>`;
       grp.appendChild(row);
     });
 
@@ -896,7 +998,11 @@ function render() {
   }
 
   body.querySelectorAll('.ev-main[data-id]').forEach(card => {
-    card.addEventListener('click', () => openViewPanel(card.dataset.id));
+    card.addEventListener('click', () => openViewPanel(card.dataset.id, null));
+  });
+
+  body.querySelectorAll('.ev-snippet[data-id]').forEach(snippet => {
+    snippet.addEventListener('click', () => openViewPanel(snippet.dataset.id, snippet.dataset.focus));
   });
 
   // 연결선 버튼
@@ -922,28 +1028,110 @@ function trim(s, n) {
   return s.length > n ? s.substring(0, n) + '…' : s;
 }
 
-function openViewPanel(id) {
+function renderRefSection(e) {
+  const articles = e.articles || [];
+  const docs = e.docs || [];
+  const hasAny = articles.length || docs.length;
+  document.getElementById('pl-sec').style.display = (hasAny || editMode) ? 'flex' : 'none';
+
+  const artEl = document.getElementById('pl-articles');
+  const docEl = document.getElementById('pl-docs');
+
+  artEl.innerHTML = articles.length ? `<span class="ref-type-label">📰 관련 기사</span>` +
+    articles.map((l,i) => `
+      <a class="ref-item" href="${l.url}" target="_blank" rel="noopener">
+        <span class="ref-icon">📰</span>
+        <span class="ref-label">${l.label}</span>
+        ${editMode ? `<button class="ref-del" data-type="article" data-idx="${i}" onclick="delRef(event,'article',${i})">✕</button>` : ''}
+      </a>`).join('') : '';
+
+  docEl.innerHTML = docs.length ? `<span class="ref-type-label">📄 관련 자료집</span>` +
+    docs.map((l,i) => `
+      <a class="ref-item" href="${l.url}" target="_blank" rel="noopener">
+        <span class="ref-icon">📄</span>
+        <span class="ref-label">${l.label}</span>
+        ${editMode ? `<button class="ref-del" data-type="doc" data-idx="${i}" onclick="delRef(event,'doc',${i})">✕</button>` : ''}
+      </a>`).join('') : '';
+
+  document.getElementById('add-article-btn').style.display = editMode ? 'block' : 'none';
+  document.getElementById('add-doc-btn').style.display = editMode ? 'block' : 'none';
+}
+
+window.delRef = function(e, type, idx) {
+  e.preventDefault();
+  const ev = EVENTS.find(x => x.id === currentId);
+  if (!ev) return;
+  if (type === 'article') ev.articles = (ev.articles||[]).filter((_,i)=>i!==idx);
+  else ev.docs = (ev.docs||[]).filter((_,i)=>i!==idx);
+  renderRefSection(ev);
+};
+
+let refFormType = null;
+function openRefForm(type) {
+  refFormType = type;
+  document.getElementById('ref-form-title').textContent = type === 'article' ? '📰 기사 추가' : '📄 자료집 추가';
+  document.getElementById('ref-label').value = '';
+  document.getElementById('ref-url').value = '';
+  document.getElementById('ref-form').style.display = 'block';
+  document.getElementById('ref-label').focus();
+}
+
+document.getElementById('add-article-btn').addEventListener('click', () => openRefForm('article'));
+document.getElementById('add-doc-btn').addEventListener('click', () => openRefForm('doc'));
+document.getElementById('ref-cancel-btn').addEventListener('click', () => {
+  document.getElementById('ref-form').style.display = 'none';
+});
+document.getElementById('ref-save-btn').addEventListener('click', () => {
+  const label = document.getElementById('ref-label').value.trim();
+  const url = document.getElementById('ref-url').value.trim();
+  if (!label || !url) { alert('제목과 링크를 모두 입력해주세요.'); return; }
+  const ev = EVENTS.find(x => x.id === currentId);
+  if (!ev) return;
+  if (refFormType === 'article') {
+    if (!ev.articles) ev.articles = [];
+    ev.articles.push({ label, url });
+  } else {
+    if (!ev.docs) ev.docs = [];
+    ev.docs.push({ label, url });
+  }
+  document.getElementById('ref-form').style.display = 'none';
+  renderRefSection(ev);
+});
+
+function openViewPanel(id, focus) {
   currentId = id;
   const e = EVENTS.find(x => x.id === id);
   if (!e) return;
   showView();
-  document.getElementById('pb').textContent = e.cat;
+  document.getElementById('pb').innerHTML = getCats(e).map(c =>
+    `<span class="cat-tag ${c.replace('/','')}" style="font-size:11px;">${c}</span>`
+  ).join('');
   document.getElementById('pt').textContent = e.title;
   document.getElementById('pd').textContent = e.date;
   document.getElementById('pe').textContent = e.event || '';
   document.getElementById('pi').textContent = e.issue || '';
   document.getElementById('ps').textContent = e.civil || '';
   document.getElementById('pr').textContent = e.result || '';
-  const pl = document.getElementById('pl');
-  pl.innerHTML = (e.links || []).map(l =>
-    `<a class="p-link" href="${l.url}" target="_blank" rel="noopener"><span class="p-link-icon">🔗</span>${l.label}</a>`
-  ).join('');
-  document.getElementById('pl-sec').style.display = (e.links && e.links.length) ? 'flex' : 'none';
-  document.getElementById('prt').innerHTML = (e.related || []).map(r =>
-    `<button class="rtag" onclick="searchBy('${r}')">${r}</button>`
-  ).join('');
+  renderRefSection(e);
   document.getElementById('panel-actions').style.display = editMode ? 'flex' : 'none';
+  document.getElementById('ref-form').style.display = 'none';
   document.getElementById('panel').classList.add('open');
+
+  // 강조 표시
+  const focusMap = { issue: 'pi', civil: 'ps', result: 'pr', event: 'pe' };
+  ['pe','pi','ps','pr'].forEach(sid => {
+    const el = document.getElementById(sid);
+    el.parentElement.style.background = '';
+    el.parentElement.style.borderRadius = '';
+    el.parentElement.style.padding = '';
+  });
+  if (focus && focusMap[focus]) {
+    const target = document.getElementById(focusMap[focus]);
+    target.parentElement.style.background = '#fffbe6';
+    target.parentElement.style.borderRadius = '6px';
+    target.parentElement.style.padding = '10px';
+    setTimeout(() => target.parentElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+  }
 }
 
 function openConnPanel(id) {
@@ -956,7 +1144,6 @@ function openConnPanel(id) {
   document.getElementById('pe').textContent = c.desc;
   ['pi','ps','pr'].forEach(id => document.getElementById(id).textContent = '');
   document.getElementById('pl-sec').style.display = 'none';
-  document.getElementById('prt').innerHTML = '';
   document.getElementById('panel-actions').style.display = 'none';
   document.getElementById('panel').classList.add('open');
 }
@@ -970,14 +1157,35 @@ function showEditForm() {
   document.getElementById('edit-mode').style.display = 'flex';
 }
 
+function getCatChecks() {
+  return Array.from(document.querySelectorAll('#ef-cat-checks input:checked')).map(i => i.value);
+}
+function setCatChecks(cats) {
+  document.querySelectorAll('#ef-cat-checks input').forEach(cb => {
+    cb.checked = cats.includes(cb.value);
+    cb.closest('.cat-check').classList.toggle('checked', cats.includes(cb.value));
+  });
+}
+
+// 체크박스 클릭 시 스타일 토글
+document.querySelectorAll('.cat-check').forEach(label => {
+  label.addEventListener('click', () => {
+    setTimeout(() => {
+      const cb = label.querySelector('input');
+      label.classList.toggle('checked', cb.checked);
+    }, 0);
+  });
+});
+
 function openNewForm(yr) {
   editingId = null;
-  ['ef-year','ef-date','ef-title','ef-event','ef-issue','ef-civil','ef-result','ef-related'].forEach(id => {
+  ['ef-year','ef-date','ef-title','ef-event','ef-issue','ef-civil','ef-result'].forEach(id => {
     document.getElementById(id).value = '';
   });
   if (yr) document.getElementById('ef-year').value = yr;
-  document.getElementById('ef-cat').value = '재난';
-  renderLinkInputs([]);
+  setCatChecks(['재난']);
+  renderFieldLinks('ef-articles-wrap', []);
+  renderFieldLinks('ef-docs-wrap', []);
   document.getElementById('pb').textContent = '새 사건 추가';
   document.getElementById('pt').textContent = '';
   document.getElementById('pd').textContent = '';
@@ -992,45 +1200,56 @@ function openEditForm(id) {
   document.getElementById('ef-year').value = e.year;
   document.getElementById('ef-date').value = e.date || '';
   document.getElementById('ef-title').value = e.title || '';
-  document.getElementById('ef-cat').value = e.cat || '재난';
   document.getElementById('ef-event').value = e.event || '';
   document.getElementById('ef-issue').value = e.issue || '';
   document.getElementById('ef-civil').value = e.civil || '';
   document.getElementById('ef-result').value = e.result || '';
-  document.getElementById('ef-related').value = (e.related || []).join(', ');
-  renderLinkInputs(e.links || []);
+  setCatChecks(getCats(e));
+  renderFieldLinks('ef-articles-wrap', e.articles || []);
+  renderFieldLinks('ef-docs-wrap', e.docs || []);
   showEditForm();
 }
 
-function renderLinkInputs(links) {
-  const wrap = document.getElementById('ef-links-wrap');
+function renderFieldLinks(wrapId, links) {
+  const wrap = document.getElementById(wrapId);
   wrap.innerHTML = '';
   links.forEach((l, i) => {
     const div = document.createElement('div');
     div.className = 'link-item';
     div.innerHTML = `
-      <input class="ef-input" placeholder="자료 이름" value="${escHtml(l.label||'')}" data-li="${i}" data-f="label">
-      <input class="ef-input" placeholder="https://..." value="${escHtml(l.url||'')}" data-li="${i}" data-f="url">
-      <button type="button" class="link-del-btn" data-li="${i}">✕</button>`;
+      <input class="ef-input" placeholder="제목" value="${escHtml(l.label||'')}" data-li="${i}">
+      <input class="ef-input" placeholder="https://..." value="${escHtml(l.url||'')}" data-li="${i}">
+      <button type="button" class="link-del-btn" data-wrap="${wrapId}" data-li="${i}">✕</button>`;
     wrap.appendChild(div);
   });
   wrap.querySelectorAll('.link-del-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const cur = getLinkInputs();
+      const cur = getFieldLinks(btn.dataset.wrap);
       cur.splice(+btn.dataset.li, 1);
-      renderLinkInputs(cur);
+      renderFieldLinks(btn.dataset.wrap, cur);
     });
   });
 }
 
-function getLinkInputs() {
-  const inputs = document.getElementById('ef-links-wrap').querySelectorAll('input');
+function getFieldLinks(wrapId) {
+  const inputs = document.getElementById(wrapId).querySelectorAll('input');
   const links = [];
   for (let i = 0; i < inputs.length; i += 2) {
     links.push({ label: inputs[i].value, url: inputs[i+1] ? inputs[i+1].value : '' });
   }
   return links;
 }
+
+document.getElementById('add-article-field-btn').addEventListener('click', () => {
+  const cur = getFieldLinks('ef-articles-wrap');
+  cur.push({ label: '', url: '' });
+  renderFieldLinks('ef-articles-wrap', cur);
+});
+document.getElementById('add-doc-field-btn').addEventListener('click', () => {
+  const cur = getFieldLinks('ef-docs-wrap');
+  cur.push({ label: '', url: '' });
+  renderFieldLinks('ef-docs-wrap', cur);
+});
 
 function escHtml(s) {
   return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -1039,28 +1258,26 @@ function escHtml(s) {
 function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,5); }
 
 // 이벤트 바인딩
-document.getElementById('add-link-btn').addEventListener('click', () => {
-  const cur = getLinkInputs();
-  cur.push({ label: '', url: '' });
-  renderLinkInputs(cur);
-});
-
 document.getElementById('save-btn').addEventListener('click', () => {
   const yr = +document.getElementById('ef-year').value;
   const title = document.getElementById('ef-title').value.trim();
   if (!yr || !title) { alert('연도와 사건명은 필수입니다.'); return; }
+  // 기존 사건의 articles/docs 유지 (수정 시)
+  const existing = editingId ? EVENTS.find(e => e.id === editingId) : null;
+  const cats = getCatChecks();
+  if (!cats.length) { alert('카테고리를 하나 이상 선택하세요.'); return; }
   const newEv = {
     id: editingId || (yr + '-' + uid()),
     year: yr,
     date: document.getElementById('ef-date').value,
     title,
-    cat: document.getElementById('ef-cat').value,
+    cat: cats,
     event: document.getElementById('ef-event').value,
     issue: document.getElementById('ef-issue').value,
     civil: document.getElementById('ef-civil').value,
     result: document.getElementById('ef-result').value,
-    links: getLinkInputs().filter(l => l.label || l.url),
-    related: document.getElementById('ef-related').value.split(',').map(s=>s.trim()).filter(Boolean),
+    articles: getFieldLinks('ef-articles-wrap').filter(l => l.label || l.url),
+    docs: getFieldLinks('ef-docs-wrap').filter(l => l.label || l.url),
   };
   if (editingId) {
     const idx = EVENTS.findIndex(e => e.id === editingId);
@@ -1130,6 +1347,23 @@ window.searchBy = function(q) {
   document.getElementById('panel').classList.remove('open');
   render();
 };
+
+// 세월호 관련 사건에 '세월호' 카테고리 자동 추가
+const SEWOLHO_IDS = ['2014-세월호','2014-판교환풍구','2015-가족협의회','2015-추자도','2016-세월호특조위','2021-피해자권리'];
+EVENTS.forEach(e => {
+  if (SEWOLHO_IDS.includes(e.id) && !e.cat.includes('세월호')) {
+    e.cat = ['세월호', ...e.cat];
+  }
+});
+EVENTS.forEach(e => {
+  if (e.links && e.links.length && !e.articles) {
+    e.articles = e.links;
+    delete e.links;
+  }
+  if (!Array.isArray(e.cat)) {
+    e.cat = e.cat ? [e.cat] : ['재난'];
+  }
+});
 
 // 초기 렌더
 render();
