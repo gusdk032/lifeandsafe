@@ -142,6 +142,9 @@ body {
 .tbtn.edit-on { background: var(--black); color: var(--white); border-color: var(--black); }
 .tbtn.export { border-color: var(--green); color: var(--green); }
 .tbtn.export:hover { background: var(--green); color: var(--white); }
+.tbtn.sheet-btn { border-color: #1a73e8; color: #1a73e8; }
+.tbtn.sheet-btn:hover { background: #1a73e8; color: var(--white); }
+.tbtn.sheet-btn.saving { opacity: .6; pointer-events: none; }
 
 /* ───────────────────────────────────────────────
    통계 바
@@ -728,6 +731,7 @@ body {
     </div>
     <div class="toolbar-right">
       <button class="tbtn" id="edit-toggle">✏️ 편집 모드</button>
+      <button class="tbtn sheet-btn" id="sheet-save-btn" style="display:none;">☁️ 시트에 저장</button>
       <button class="tbtn export" id="exp-btn">↓ JSON 저장</button>
     </div>
   </div>
@@ -1389,16 +1393,6 @@ document.getElementById('pc').addEventListener('click', () => {
   document.getElementById('panel').classList.remove('open');
 });
 
-document.getElementById('edit-toggle').addEventListener('click', () => {
-  editMode = !editMode;
-  const btn = document.getElementById('edit-toggle');
-  btn.textContent = editMode ? '✅ 편집 모드 ON' : '✏️ 편집 모드';
-  btn.classList.toggle('edit-on', editMode);
-  document.getElementById('panel-actions').style.display =
-    (editMode && currentId) ? 'flex' : 'none';
-  render();
-});
-
 document.getElementById('exp-btn').addEventListener('click', () => {
   const json = JSON.stringify(EVENTS, null, 2);
   const blob = new Blob([json], { type: 'application/json' });
@@ -1432,7 +1426,6 @@ window.searchBy = function(q) {
 // ── 마이그레이션 (초기화 순서 중요) ──
 // 1) cat 문자열 → 배열
 // 2) links → articles
-// 3) 세월호 자동 태그는 제거 (직접 편집 모드에서 설정)
 EVENTS.forEach(e => {
   if (!Array.isArray(e.cat)) {
     e.cat = e.cat ? [e.cat] : ['재난'];
@@ -1443,8 +1436,98 @@ EVENTS.forEach(e => {
   }
 });
 
-// 초기 렌더
-render();
+// ── Google Sheets 연동 ──
+const SHEET_API = 'https://script.google.com/macros/s/AKfycbwSVOK3UCxTDlCDjwT1TfKS27buaDSFgrNkX7-EnBuXAnu8oCdR9V8UAWxXxurBy2Zlsw/exec';
+
+// 페이지 로드 시 시트에서 데이터 불러오기
+async function loadFromSheet() {
+  try {
+    showToast('📊 구글 시트에서 데이터를 불러오는 중...');
+    const res = await fetch(SHEET_API);
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    if (data.events && data.events.length > 0) {
+      // 시트 데이터가 있으면 덮어씀
+      EVENTS.length = 0;
+      data.events.forEach(e => {
+        if (!Array.isArray(e.cat)) e.cat = e.cat ? [e.cat] : ['재난'];
+        EVENTS.push(e);
+      });
+      if (data.conns && data.conns.length > 0) {
+        CONNS.length = 0;
+        data.conns.forEach(c => CONNS.push(c));
+      }
+      render();
+      showToast('✅ 구글 시트에서 데이터를 불러왔습니다!');
+    } else {
+      // 시트가 비어있으면 현재 데이터를 시트에 저장
+      showToast('📝 시트가 비어있어 현재 데이터를 저장합니다...');
+      await saveToSheet();
+    }
+  } catch (err) {
+    showToast('⚠️ 시트 연결 실패 — 로컬 데이터로 실행합니다');
+    render();
+  }
+}
+
+// 시트에 데이터 저장
+async function saveToSheet() {
+  const btn = document.getElementById('sheet-save-btn');
+  btn.textContent = '☁️ 저장 중...';
+  btn.classList.add('saving');
+  try {
+    const res = await fetch(SHEET_API, {
+      method: 'POST',
+      body: JSON.stringify({ events: EVENTS, conns: CONNS }),
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    showToast(`✅ 구글 시트에 저장 완료! (${data.saved}건)`);
+  } catch (err) {
+    showToast('❌ 저장 실패: ' + err.message);
+  } finally {
+    btn.textContent = '☁️ 시트에 저장';
+    btn.classList.remove('saving');
+  }
+}
+
+// 토스트 메시지
+function showToast(msg) {
+  let t = document.getElementById('toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'toast';
+    t.style.cssText = `
+      position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+      background:#111; color:#fff; font-size:13px; font-family:var(--sans);
+      padding:10px 20px; border-radius:20px; z-index:9999;
+      box-shadow:0 4px 12px rgba(0,0,0,.2); pointer-events:none;
+      transition: opacity .3s;
+    `;
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => { t.style.opacity = '0'; }, 3000);
+}
+
+// 편집 모드 ON일 때만 시트 저장 버튼 표시
+document.getElementById('edit-toggle').addEventListener('click', () => {
+  editMode = !editMode;
+  const btn = document.getElementById('edit-toggle');
+  btn.textContent = editMode ? '✅ 편집 모드 ON' : '✏️ 편집 모드';
+  btn.classList.toggle('edit-on', editMode);
+  document.getElementById('sheet-save-btn').style.display = editMode ? 'block' : 'none';
+  document.getElementById('panel-actions').style.display =
+    (editMode && currentId) ? 'flex' : 'none';
+  render();
+});
+
+document.getElementById('sheet-save-btn').addEventListener('click', saveToSheet);
+
+// 초기 실행 — 시트에서 데이터 불러오기
+loadFromSheet();
 </script>
 </body>
 </html>
