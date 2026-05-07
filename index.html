@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>대한민국 생명안전의제 운동 타임라인 1994–2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ───────────────────────────────────────────────
+   기본 리셋 & 변수
+─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --serif: 'Noto Serif KR', Georgia, serif;
+  --sans:  'Noto Sans KR', sans-serif;
+  --black: #0d0d0d;
+  --gray1: #333;
+  --gray2: #666;
+  --gray3: #999;
+  --gray4: #ccc;
+  --gray5: #e8e8e8;
+  --gray6: #f5f5f5;
+  --white: #ffffff;
+  --red:   #c0392b;
+  --orange:#d35400;
+  --slate: #556677;
+  --blue:  #1a5276;
+  --green: #1a6644;
+  --panel-w: 380px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--white);
+  color: var(--black);
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* ───────────────────────────────────────────────
+   레이아웃
+─────────────────────────────────────────────── */
+.page-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+}
+
+/* ───────────────────────────────────────────────
+   헤더
+─────────────────────────────────────────────── */
+.site-header {
+  padding: 36px 0 24px;
+  border-bottom: 2.5px solid var(--black);
+  margin-bottom: 24px;
+}
+.site-header h1 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--black);
+  margin-bottom: 6px;
+}
+.site-header .subtitle {
+  font-size: 12px;
+  color: var(--gray2);
+  letter-spacing: .03em;
+}
+
+/* ───────────────────────────────────────────────
+   툴바
+─────────────────────────────────────────────── */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+  max-width: 320px;
+}
+.search-wrap::before {
+  content: '🔍';
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  pointer-events: none;
+}
+#srch {
+  font-family: var(--sans);
+  font-size: 13px;
+  width: 100%;
+  border: 1.5px solid var(--gray4);
+  border-radius: 4px;
+  padding: 7px 10px 7px 30px;
+  outline: none;
+  color: var(--black);
+  transition: border-color .15s;
+}
+#srch:focus { border-color: var(--black); }
+
+.filter-group { display: flex; gap: 5px; flex-wrap: wrap; }
+.fbtn {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 5px 13px;
+  border-radius: 3px;
+  border: 1.5px solid var(--gray4);
+  background: var(--white);
+  cursor: pointer;
+  color: var(--gray2);
+  transition: all .12s;
+  letter-spacing: .02em;
+}
+.fbtn:hover { border-color: var(--black); color: var(--black); }
+.fbtn.on { background: var(--black); color: var(--white); border-color: var(--black); }
+
+.toolbar-right { display: flex; gap: 8px; margin-left: auto; }
+.tbtn {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: 1.5px solid var(--gray4);
+  background: var(--white);
+  cursor: pointer;
+  color: var(--gray1);
+  transition: all .12s;
+}
+.tbtn:hover { border-color: var(--black); color: var(--black); }
+.tbtn.edit-on { background: var(--black); color: var(--white); border-color: var(--black); }
+.tbtn.export { border-color: var(--green); color: var(--green); }
+.tbtn.export:hover { background: var(--green); color: var(--white); }
+
+/* ───────────────────────────────────────────────
+   통계 바
+─────────────────────────────────────────────── */
+.stats-bar {
+  display: flex;
+  gap: 0;
+  border: 1.5px solid var(--gray5);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.stat-item {
+  flex: 1;
+  text-align: center;
+  padding: 12px 8px;
+  border-right: 1px solid var(--gray5);
+}
+.stat-item:last-child { border-right: none; }
+.stat-n {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--black);
+  display: block;
+}
+.stat-l {
+  font-size: 10px;
+  color: var(--gray3);
+  letter-spacing: .04em;
+  display: block;
+  margin-top: 2px;
+}
+
+/* ───────────────────────────────────────────────
+   컬럼 헤더
+─────────────────────────────────────────────── */
+.col-header {
+  display: grid;
+  grid-template-columns: 56px 1fr 1fr 1fr 1fr;
+  gap: 0;
+  border-bottom: 2px solid var(--black);
+  padding-bottom: 8px;
+  margin-bottom: 4px;
+  position: sticky;
+  top: 0;
+  background: var(--white);
+  z-index: 30;
+}
+.ch {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-align: center;
+  padding: 4px 6px;
+  text-transform: uppercase;
+  color: var(--gray3);
+}
+.ch.c-event  { color: var(--red); }
+.ch.c-issue  { color: var(--gray1); }
+.ch.c-civil  { color: var(--green); }
+.ch.c-result { color: var(--blue); }
+
+/* ───────────────────────────────────────────────
+   타임라인 본체
+─────────────────────────────────────────────── */
+.tl-wrap { position: relative; }
+#tl-body { position: relative; }
+
+.yr-group { margin-bottom: 4px; }
+
+.yr-heading {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--black);
+  padding: 14px 0 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: -.01em;
+}
+.yr-heading::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--gray5);
+}
+
+.ev-row {
+  display: grid;
+  grid-template-columns: 56px 1fr 1fr 1fr 1fr;
+  gap: 0;
+  min-height: 72px;
+  border-bottom: 1px solid var(--gray6);
+  align-items: stretch;
+  transition: background .1s;
+}
+.ev-row:hover { background: #fafafa; }
+
+/* 연도 점 */
+.yr-dot-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 12px;
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 2px solid var(--white);
+  box-shadow: 0 0 0 1.5px currentColor;
+}
+.dot.재난    { color: var(--red);    background: var(--red); }
+.dot.산업재해 { color: var(--orange); background: var(--orange); }
+.dot.운동    { color: var(--slate);  background: var(--slate); }
+.dot.입법    { color: var(--blue);   background: var(--blue); }
+.yr-vline {
+  width: 1px;
+  flex: 1;
+  background: var(--gray5);
+  margin-top: 4px;
+}
+
+/* 셀 공통 */
+.ev-cell {
+  padding: 10px 8px;
+  border-left: 1px solid var(--gray6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 대표사건 카드 */
+.ev-main {
+  cursor: pointer;
+  padding: 9px 11px;
+  border-radius: 4px;
+  border-left: 3px solid transparent;
+  transition: background .1s, transform .1s;
+}
+.ev-main:hover { background: var(--gray6); transform: translateX(2px); }
+.ev-main:active { transform: translateX(1px); }
+
+.ev-main.재난    { border-left-color: var(--red); }
+.ev-main.산업재해 { border-left-color: var(--orange); }
+.ev-main.운동    { border-left-color: var(--slate); }
+.ev-main.입법    { border-left-color: var(--blue); }
+
+.ev-title {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--black);
+  line-height: 1.35;
+  margin-bottom: 4px;
+}
+.ev-date {
+  font-size: 10px;
+  color: var(--gray3);
+  letter-spacing: .03em;
+}
+.ev-more {
+  font-size: 10px;
+  color: var(--gray3);
+  margin-top: 5px;
+}
+
+/* 쟁점·시민사회·결과 텍스트 */
+.ev-snippet {
+  font-size: 11px;
+  color: var(--gray2);
+  line-height: 1.65;
+  padding: 2px 4px;
+}
+
+/* 편집모드 추가 버튼 */
+.add-btn {
+  width: 100%;
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--gray3);
+  border: 1.5px dashed var(--gray4);
+  background: none;
+  border-radius: 4px;
+  padding: 7px;
+  cursor: pointer;
+  text-align: center;
+  margin: 6px 0;
+  transition: all .12s;
+}
+.add-btn:hover { border-color: var(--black); color: var(--black); }
+
+/* 연결선 버튼 */
+.conn-btn {
+  position: absolute;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--white);
+  border: 1.5px solid var(--black);
+  border-radius: 20px;
+  padding: 5px 13px;
+  cursor: pointer;
+  color: var(--black);
+  white-space: nowrap;
+  z-index: 10;
+  letter-spacing: .02em;
+  left: 56px;
+  transition: all .12s;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+}
+.conn-btn:hover { background: var(--black); color: var(--white); }
+
+/* 빈 결과 */
+.empty-msg {
+  font-size: 14px;
+  color: var(--gray3);
+  padding: 48px 0;
+  text-align: center;
+}
+
+/* ───────────────────────────────────────────────
+   사이드 패널
+─────────────────────────────────────────────── */
+.panel-overlay {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: var(--panel-w);
+  background: var(--white);
+  border-left: 2px solid var(--black);
+  z-index: 200;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform .22s cubic-bezier(.4,0,.2,1);
+  display: flex;
+  flex-direction: column;
+}
+.panel-overlay.open { transform: translateX(0); }
+
+.panel-header {
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid var(--gray5);
+  position: sticky;
+  top: 0;
+  background: var(--white);
+  z-index: 5;
+}
+.panel-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+.p-cat {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gray3);
+  margin-bottom: 6px;
+}
+.p-title {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--black);
+  line-height: 1.4;
+}
+.p-date {
+  font-size: 11px;
+  color: var(--gray3);
+  margin-top: 5px;
+  letter-spacing: .03em;
+}
+.p-close {
+  font-family: var(--sans);
+  font-size: 11px;
+  background: none;
+  border: 1.5px solid var(--gray4);
+  border-radius: 3px;
+  padding: 4px 9px;
+  cursor: pointer;
+  color: var(--gray2);
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: all .1s;
+}
+.p-close:hover { border-color: var(--black); color: var(--black); }
+
+.panel-body { padding: 20px; display: flex; flex-direction: column; gap: 18px; flex: 1; }
+
+.p-section { display: flex; flex-direction: column; gap: 6px; }
+.p-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gray3);
+}
+.p-text {
+  font-size: 13px;
+  color: var(--gray1);
+  line-height: 1.75;
+  font-family: var(--sans);
+}
+
+.p-link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: var(--blue);
+  text-decoration: none;
+  padding: 7px 10px;
+  border: 1px solid var(--gray5);
+  border-radius: 4px;
+  margin-bottom: 5px;
+  transition: all .1s;
+}
+.p-link:hover { border-color: var(--blue); background: #f0f6ff; }
+.p-link-icon { font-size: 14px; flex-shrink: 0; }
+
+.related-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.rtag {
+  font-family: var(--sans);
+  font-size: 11px;
+  padding: 4px 12px;
+  border: 1.5px solid var(--gray4);
+  border-radius: 20px;
+  cursor: pointer;
+  background: var(--white);
+  color: var(--gray1);
+  transition: all .1s;
+}
+.rtag:hover { border-color: var(--black); color: var(--black); }
+
+.panel-actions { display: flex; gap: 8px; margin-top: 4px; }
+.edit-action-btn {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 4px;
+  border: 1.5px solid var(--gray4);
+  background: var(--white);
+  cursor: pointer;
+  color: var(--gray1);
+  transition: all .1s;
+}
+.edit-action-btn:hover { border-color: var(--black); color: var(--black); }
+.edit-action-btn.danger { border-color: #e74c3c; color: #e74c3c; }
+.edit-action-btn.danger:hover { background: #e74c3c; color: var(--white); }
+
+/* ───────────────────────────────────────────────
+   편집 폼
+─────────────────────────────────────────────── */
+.edit-form { display: flex; flex-direction: column; gap: 14px; }
+.ef-row { display: flex; flex-direction: column; gap: 5px; }
+.ef-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gray1);
+  letter-spacing: .04em;
+}
+.ef-input, .ef-textarea, .ef-select {
+  font-family: var(--sans);
+  font-size: 13px;
+  border: 1.5px solid var(--gray4);
+  border-radius: 4px;
+  padding: 8px 11px;
+  width: 100%;
+  outline: none;
+  color: var(--black);
+  resize: vertical;
+  transition: border-color .12s;
+}
+.ef-input:focus, .ef-textarea:focus, .ef-select:focus { border-color: var(--black); }
+.ef-textarea { min-height: 80px; }
+.ef-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.link-item { display: flex; gap: 6px; align-items: center; margin-bottom: 6px; }
+.link-item .ef-input { flex: 1; }
+.link-del-btn {
+  font-family: var(--sans);
+  font-size: 11px;
+  background: none;
+  border: 1.5px solid var(--gray4);
+  border-radius: 3px;
+  padding: 5px 8px;
+  cursor: pointer;
+  color: var(--gray2);
+  flex-shrink: 0;
+  transition: all .1s;
+}
+.link-del-btn:hover { border-color: #e74c3c; color: #e74c3c; }
+
+.add-link-btn {
+  font-family: var(--sans);
+  font-size: 11px;
+  background: none;
+  border: 1.5px dashed var(--gray4);
+  border-radius: 4px;
+  padding: 6px;
+  width: 100%;
+  cursor: pointer;
+  color: var(--gray2);
+  transition: all .1s;
+  margin-top: 2px;
+}
+.add-link-btn:hover { border-color: var(--black); color: var(--black); }
+
+.save-btn {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 700;
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  padding: 11px;
+  cursor: pointer;
+  transition: opacity .1s;
+}
+.save-btn:hover { opacity: .85; }
+.cancel-btn {
+  font-family: var(--sans);
+  font-size: 13px;
+  background: none;
+  border: 1.5px solid var(--gray4);
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+  color: var(--gray1);
+  transition: all .1s;
+}
+.cancel-btn:hover { border-color: var(--black); }
+
+/* ───────────────────────────────────────────────
+   반응형
+─────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  :root { --panel-w: 100vw; }
+  .col-header { grid-template-columns: 44px 1fr 1fr; }
+  .col-header .ch.c-civil,
+  .col-header .ch.c-result { display: none; }
+  .ev-row { grid-template-columns: 44px 1fr 1fr; }
+  .ev-row .ev-cell:nth-child(4),
+  .ev-row .ev-cell:nth-child(5) { display: none; }
+}
+@media (max-width: 600px) {
+  .page-wrap { padding: 0 14px 60px; }
+  .col-header { grid-template-columns: 36px 1fr; }
+  .col-header .ch.c-issue { display: none; }
+  .ev-row { grid-template-columns: 36px 1fr; }
+  .ev-row .ev-cell:nth-child(3) { display: none; }
+  .stats-bar { flex-wrap: wrap; }
+  .stat-item { min-width: 30%; }
+  .toolbar { gap: 6px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <!-- 헤더 -->
+  <header class="site-header">
+    <h1>대한민국 생명안전의제 운동 타임라인</h1>
+    <p class="subtitle">1994–2026 &nbsp;|&nbsp; 재난·산업재해·시민운동·입법의 역사</p>
+  </header>
+
+  <!-- 툴바 -->
+  <div class="toolbar">
+    <div class="search-wrap">
+      <input type="text" id="srch" placeholder="사건명·키워드 검색…" autocomplete="off">
+    </div>
+    <div class="filter-group">
+      <button class="fbtn on" data-f="전체">전체</button>
+      <button class="fbtn" data-f="재난">재난</button>
+      <button class="fbtn" data-f="산업재해">산업재해</button>
+      <button class="fbtn" data-f="운동/조직">운동·조직</button>
+      <button class="fbtn" data-f="입법/정책">입법·정책</button>
+    </div>
+    <div class="toolbar-right">
+      <button class="tbtn" id="edit-toggle">✏️ 편집 모드</button>
+      <button class="tbtn export" id="exp-btn">↓ JSON 저장</button>
+    </div>
+  </div>
+
+  <!-- 통계 -->
+  <div class="stats-bar">
+    <div class="stat-item"><span class="stat-n" id="st-total">0</span><span class="stat-l">전체 사건</span></div>
+    <div class="stat-item"><span class="stat-n" id="st-show">0</span><span class="stat-l">표시 중</span></div>
+    <div class="stat-item"><span class="stat-n" id="st-재난">0</span><span class="stat-l">재난</span></div>
+    <div class="stat-item"><span class="stat-n" id="st-산업재해">0</span><span class="stat-l">산업재해</span></div>
+    <div class="stat-item"><span class="stat-n" id="st-운동">0</span><span class="stat-l">운동·조직</span></div>
+    <div class="stat-item"><span class="stat-n" id="st-입법">0</span><span class="stat-l">입법·정책</span></div>
+  </div>
+
+  <!-- 컬럼 헤더 -->
+  <div class="col-header">
+    <div class="ch"></div>
+    <div class="ch c-event">대표 사건</div>
+    <div class="ch c-issue">쟁점</div>
+    <div class="ch c-civil">시민사회 대응·담론</div>
+    <div class="ch c-result">결과·입법</div>
+  </div>
+
+  <!-- 타임라인 -->
+  <div class="tl-wrap">
+    <div id="tl-body"></div>
+  </div>
+
+</div><!-- /page-wrap -->
+
+<!-- 사이드 패널 -->
+<div class="panel-overlay" id="panel">
+  <div class="panel-header">
+    <div class="panel-top-row">
+      <div>
+        <div class="p-cat" id="pb"></div>
+        <div class="p-title" id="pt"></div>
+        <div class="p-date" id="pd"></div>
+      </div>
+      <button class="p-close" id="pc">닫기</button>
+    </div>
+  </div>
+
+  <!-- 보기 모드 -->
+  <div class="panel-body" id="view-mode">
+    <div class="p-section"><div class="p-label">배경 및 경과</div><div class="p-text" id="pe"></div></div>
+    <div class="p-section"><div class="p-label">쟁점</div><div class="p-text" id="pi"></div></div>
+    <div class="p-section"><div class="p-label">시민사회 대응·담론</div><div class="p-text" id="ps"></div></div>
+    <div class="p-section"><div class="p-label">결과·입법</div><div class="p-text" id="pr"></div></div>
+    <div class="p-section" id="pl-sec">
+      <div class="p-label">관련 자료</div>
+      <div id="pl"></div>
+    </div>
+    <div class="p-section">
+      <div class="p-label">연관 사건</div>
+      <div class="related-tags" id="prt"></div>
+    </div>
+    <div class="panel-actions" id="panel-actions" style="display:none;">
+      <button class="edit-action-btn" id="edit-this-btn">수정하기</button>
+      <button class="edit-action-btn danger" id="del-this-btn">삭제</button>
+    </div>
+  </div>
+
+  <!-- 편집 폼 -->
+  <div class="panel-body" id="edit-mode" style="display:none;">
+    <div class="edit-form">
+      <div class="ef-row-2">
+        <div class="ef-row">
+          <label class="ef-label">연도 *</label>
+          <input class="ef-input" id="ef-year" type="number" placeholder="2024">
+        </div>
+        <div class="ef-row">
+          <label class="ef-label">날짜 표기</label>
+          <input class="ef-input" id="ef-date" placeholder="2024.06.24.">
+        </div>
+      </div>
+      <div class="ef-row">
+        <label class="ef-label">사건명 *</label>
+        <input class="ef-input" id="ef-title" placeholder="사건 이름을 입력하세요">
+      </div>
+      <div class="ef-row">
+        <label class="ef-label">카테고리</label>
+        <select class="ef-select" id="ef-cat">
+          <option value="재난">재난</option>
+          <option value="산업재해">산업재해</option>
+          <option value="운동/조직">운동·조직</option>
+          <option value="입법/정책">입법·정책</option>
+        </select>
+      </div>
+      <div class="ef-row">
+        <label class="ef-label">배경 및 경과</label>
+        <textarea class="ef-textarea" id="ef-event" rows="3" placeholder="사건의 경과를 입력하세요"></textarea>
+      </div>
+      <div class="ef-row">
+        <label class="ef-label">쟁점</label>
+        <textarea class="ef-textarea" id="ef-issue" rows="3" placeholder="주요 쟁점을 입력하세요"></textarea>
+      </div>
+      <div class="ef-row">
+        <label class="ef-label">시민사회 대응·담론</label>
+        <textarea class="ef-textarea" id="ef-civil" rows="3" placeholder="시민사회의 대응을 입력하세요"></textarea>
+      </div>
+      <div class="ef-row">
+        <label class="ef-label">결과·입법</label>
+        <textarea class="ef-textarea" id="ef-result" rows="3" placeholder="결과 및 입법 내용을 입력하세요"></textarea>
+      </div>
+      <div class="ef-row">
+        <label class="ef-label">관련 자료 링크</label>
+        <div id="ef-links-wrap"></div>
+        <button type="button" class="add-link-btn" id="add-link-btn">+ 링크 추가</button>
+      </div>
+      <div class="ef-row">
+        <label class="ef-label">연관 사건 ID (쉼표로 구분)</label>
+        <input class="ef-input" id="ef-related" placeholder="2014-세월호, 2022-이태원">
+        <small style="font-size:10px;color:var(--gray3);margin-top:3px;">사건 ID는 "연도-이름" 형식입니다 (예: 2018-김용균)</small>
+      </div>
+      <button type="button" class="save-btn" id="save-btn">저장하기</button>
+      <button type="button" class="cancel-btn" id="cancel-edit-btn">취소</button>
+    </div>
+  </div>
+</div><!-- /panel -->
+
+<script>
+// ─────────────────────────────────────────────
+// 데이터 — 이 아래 EVENTS 배열을 수정하거나
+// JSON 저장 버튼으로 내보낸 파일을 붙여넣으세요
+// ─────────────────────────────────────────────
+
+let EVENTS = [
+{id:"2014-세월호",year:2014,date:"2014.04.16.",title:"세월호 참사",cat:"재난",event:"세월호참사는 사회적 재난참사들 중 처음으로 노동·시민·종교 등 모든 단체가 함께 모이게 한 사건. 이명박 정부 시절 선박 연령 제한 완화(20→30년) 및 증축 허용 이후 발생. 같은 원인으로 2017년 스텔라데이지호 침몰 참사도 발생.",issue:"이전의 '생명안전'은 개인에게 경고되는 말이었으나, 이제 국가와 자본이 이윤·효율보다 시민의 생명과 안전을 최우선으로 해야 한다는 패러다임의 전환. 구조 방기, 국가 책임, 독립적 조사기구 부재.",civil:"노란리본: 희생자 추모와 미수습자 귀환을 바라는 전국민적 연대의 상징. 유가족과 시민들은 진상규명·책임자 처벌·독립 조사기구 설치를 요구하며 서명운동·단식농성·도보행진 등을 이어감.",result:"2014.11.07. 세월호참사 특별법 통과 → 2014.11.19. 대통령 공포.",links:[{label:"4.16세월호참사 특별조사위원회",url:"https://www.416commission.go.kr"},{label:"세월호 기억관",url:"https://sewolho416.org"}],related:["2014-판교환풍구","2015-가족협의회","2022-이태원"]},
+{id:"2014-판교환풍구",year:2014,date:"2014",title:"판교 환풍구 붕괴",cat:"재난",event:"야외 공연을 보기 위해 환풍구에 올라갔던 시민 16명 추락 사망.",issue:"공연 안전 관리 부재, 건축물 설비 기준의 허점.",civil:"안전 시설물에 대한 공공 인식 제고. 설비 기준 강화 요구.",result:"건축물 설비 기준 규칙 개정: 환풍구 덮개 하중 기준 및 안전펜스 설치 의무 강화.",links:[],related:["2014-세월호"]},
+{id:"2015-가족협의회",year:2015,date:"2015.01.25.",title:"4.16 피해자 가족협의회 발족",cat:"운동/조직",event:"(사)4.16세월호참사 진상규명 및 안전사회 건설을 위한 피해자 가족협의회 발족. 4.16인권선언 제정운동 시작 → 전국 풀뿌리 토론회 진행.",issue:"세월호 이후 지속적 진상규명 요구와 안전사회 건설을 위한 피해자 당사자 조직화 필요.",civil:"피해자 가족이 운동 주체로 조직화. 4.16인권선언 제정 운동으로 '안전권'을 인권의 언어로 정식화.",result:"4.16인권선언 제정운동 및 전국 풀뿌리 토론회.",links:[],related:["2014-세월호"]},
+{id:"2015-추자도",year:2015,date:"2015.09.05.",title:"추자도 돌고래호 전복",cat:"재난",event:"세월호참사 1년여 만에 승선원 허위 명부, 해경의 초기 상황 전파 지연 및 부실 수색이 반복됨.",issue:"세월호 이후에도 반복되는 해상 안전 관리 부재. 제도 개선의 현장 미착근.",civil:"제도 개선이 현장에서 이행되지 않고 있음을 드러낸 사건.",result:"해상 안전 관리 논의 지속.",links:[],related:["2014-세월호"]},
+{id:"2015-의정부화재",year:2015,date:"2015.01.10.",title:"의정부 도시형 생활주택 화재",cat:"재난",event:"주차장 화재가 '드라이비트' 외벽을 타고 번져 5명 사망, 125명 부상. 건물 간격 1~2m.",issue:"이명박 정부 '도시형 생활주택' 안전 규제 완화가 부른 인재. 건물 간격 축소, 스프링클러 의무 면제.",civil:"규제 완화 정책과 재난의 연결고리에 대한 사회적 문제 제기.",result:"6층 이상 건축물 스프링클러 설치 의무화, 외벽 불연성 재료 기준 강화 등 건축법 개정.",links:[],related:["2022-반지하"]},
+{id:"2016-구의역",year:2016,date:"2016.05.28.",title:"구의역 스크린도어 사망사고",cat:"산업재해",event:"구의역 9-4 승강장 스크린도어 수리하던 하청업체 노동자 김군(19세) 사망. 2인 1조 원칙 불가 상황에서 서울메트로는 혼자 작업을 방관.",issue:"원청이 안전비용·책임을 하청에 떠넘기는 '위험의 외주화'가 낳은 구조적 문제. 비용절감을 위해 청년 비정규직을 사지로 내모는 사회구조.",civil:"구의역 9-4 포스트잇 추모. '위험의 외주화' 규탄 운동 전국 확산. 산재를 기업 시스템·국가 책임의 문제로 바라보는 전환 계기.",result:"서울시, 지하철 안전업무 하청→서울교통공사 직접고용 전환. 2인 1조 매뉴얼 실질적 작동 제도 개선.",links:[],related:["2018-김용균","2022-중대재해법"]},
+{id:"2016-이한빛",year:2016,date:"2016.10.26.",title:"tvN 이한빛 PD 사망",cat:"산업재해",event:"tvN '혼술남녀' 조연출 이한빛 PD 사망. 하루 20시간 고강도 노동·철야 작업 일상화.",issue:"'개인의 근태 불량'으로 책임을 돌리는 회사 측 입장. 구조적 폭력으로 인한 자살.",civil:"유가족이 녹음파일·메신저 기록으로 진상규명. 청년유니온 중심 36개 단체 대책위 구성(2017.04.18.).",result:"2017년 6월 CJENM 공식 사과·재발방지대책 합의. '한빛미디어노동인권센터' 설립(2018).",links:[],related:["2016-구의역"]},
+{id:"2016-IT과로사",year:2016,date:"2016년경",title:"IT/게임업계 크런치 모드 과로사",cat:"산업재해",event:"넷마블네오 게임개발 노동자 A씨가 급성심근경색으로 사망. 발병 전 4주 78시간, 7주 전 89시간 근무.",issue:"화이트칼라·전문직 과로 문제와 포괄임금제 폐단.",civil:"주요 IT기업들에 노동조합 설립. 포괄임금제 전면 금지 요구.",result:"산업재해 인정. 주 52시간 근무제 정착의 도화선.",links:[],related:["2017-집배원"]},
+{id:"2017-스텔라데이지",year:2017,date:"2017.03.31.",title:"스텔라데이지호 침몰",cat:"재난",event:"해외 바다에서 22명 선원 실종(비정규직). 5분 만에 침몰. 단일선체 유조선을 개조한 화물선 구조적 문제.",issue:"심해수색 비용 문제. 세월호 원인과 동일한 선박 정책.",civil:"세월호 가족들과 연대하여 농성 시작. 416연대 중심 시민대책위 구성(7월). 2019년 2월 최초 심해수색.",result:"2019년 국회 공청회에서 2차 심해수색 필요 결론 → 예산 미편성으로 무산.",links:[],related:["2014-세월호"]},
+{id:"2017-집배원",year:2017,date:"2017.07.06.",title:"집배노동자 과로사·과로자살",cat:"산업재해",event:"7.6. 안양우체국 집배원 분신(7.8. 사망). 9.5. 서광주우체국 집배원 '두렵다. 이 아픈 몸 이끌고 출근하라네. 사람 취급 안 하네. 가족들 미안해' 28자 유서 남기고 자살.",issue:"과로사·자살의 근본 원인은 인력 문제. 공공기관 인력 문제는 정부정책 문제.",civil:"30개 단체 중심 시민사회 대책위 구성. 〈집배원 노동조건 개선 기획추진단〉 발족, 실태조사 3건 진행.",result:"7대 권고안 담은 보고서 제출. 이행점검단 구성했으나 실제 인원 충원 미이행.",links:[],related:["2016-IT과로사"]},
+{id:"2017-삼성반도체",year:2017,date:"2017.08.",title:"삼성반도체 직업병 대법원 판결",cat:"입법/정책",event:"2007년 황유미 백혈병 사망 이후 10년 투쟁. 2017년 8월 대법원 판결, 노동부 인과관계 추정 원칙 도입 발표.",issue:"반도체 등 첨단산업 직업병 인과관계 입증 어려움.",civil:"10년 집단 투쟁으로 법원 판결과 합의 이끌어냄.",result:"2018년 7월 삼성전자 중재 합의: 포괄 보상(2028년까지), 대표이사 공개 사과, 500억 기탁 → 전자산업 안전보건센터 건립.",links:[],related:["2018-김용균"]},
+{id:"2018-김용균",year:2018,date:"2018.12.10.",title:"태안화력 김용균 노동자 사망",cat:"산업재해",event:"24세 비정규직 노동자 김용균 씨가 혼자 점검 중 컨베이어 벨트에 끼여 사망. 입사 3개월. 인원 부족, 설비개선 요구 묵살, 방치된 위험환경 등 복합적 원인.",issue:"원하청 구조에서 발생하는 권한·책임·이윤의 문제. '생명안전업무'가 무엇인가에 대한 논의 촉발.",civil:"노조·유족과 함께 시민대책위 구성. 산재를 사업장 밖 사회적 투쟁으로 확대. 원하청·외주화·민영화 문제 구체화.",result:"2019.02. 당정협의문 발표. 석탄화력발전소 특별노동안전조사위원회 구성, 22개 권고안 발표. 산업안전보건법 전부 개정(김용균법) 통과.",links:[{label:"고 김용균 재단",url:"https://www.kimyongkyun.or.kr"}],related:["2016-구의역","2019-중대재해법운동","2025-김충현"]},
+{id:"2019-중대재해법운동",year:2019,date:"2019",title:"중대재해기업처벌법 제정 운동 본격화",cat:"운동/조직",event:"김용균 투쟁 이후 제정 필요성 재점화. 2006년부터 시작된 13년간의 기업처벌강화 투쟁 역사. 세월호 이후 4.16연대 '존엄과 안전위원회'가 중대재해 기업처벌법안 마련·20대 국회 발의.",issue:"법리적 어려움과 자본·보수야당·언론의 정치 공세. 의제화는 넓어졌으나 실질적 입법쟁취까지 집단적 조직 부족.",civil:"제정연대 회의 재개, 유가족 이야기마당 진행. 조합원·시민 인지도 상승.",result:"2020년 총선 대응과 연동하여 법 제정 운동 가속화 → 2022년 중대재해처벌법 시행.",links:[],related:["2018-김용균","2021-중대재해법제정"]},
+{id:"2019-서지윤",year:2019,date:"2019.01.04.",title:"서울의료원 서지윤 간호사 사망",cat:"산업재해",event:"서울의료원 간호사 서지윤 씨 사망(자살 추정). 직장 내 괴롭힘을 조사하면서 행위자보다 구조·문화·환경 중심으로 접근.",issue:"직장 내 괴롭힘: 특정 사안이 아닌 구조·문화·환경의 문제.",civil:"노조에서 시민대책위 구성 → 서울시 위촉, 진상대책위 구성.",result:"직장 내 괴롭힘 구조적 접근 방식 정착 계기.",links:[],related:["2016-이한빛"]},
+{id:"2019-문중원",year:2019,date:"2019.11.29.",title:"한국마사회 문중원 기수 사망",cat:"산업재해",event:"문중원 기수가 마사회 부정·비리를 폭로하는 유서를 남기고 자결. 부산경남경마공원 2005년 개장 이후 7명 스스로 목숨을 끊음.",issue:"개별사업자 형태의 특수고용노동자 신분. 공공기관이자 사행산업의 특수성.",civil:"냉동차에 시신을 모시고 광화문 농성. 마사회 적폐청산 시민대책위 구성, 경마기수노조 설립.",result:"2020년 3월 단식농성 이틀 만에 '죽음의 재발방지를 위한 합의' 이룸.",links:[],related:["2019-중대재해법운동"]},
+{id:"2020-코로나19",year:2020,date:"2020.01.20.",title:"코로나19 팬데믹",cat:"재난",event:"국내 첫 확진자(1.20.). 3월 WHO 팬데믹 선언. 12월 병상 부족 사망 사례 발생.",issue:"과도한 개인정보 수집·동선 공개 등 인권침해. 이주민 차별·혐오 심화. 재난지원금 이주민 제외. 강압적 방역정책 비판.",civil:"코로나19 인권대응네트워크 발족. 공중보건체계·공공병원 확대 지속 제기.",result:"공공의료체계 문제점 확인. 이후 재택치료 정책 전환.",links:[],related:["2020-기후위기"]},
+{id:"2020-이천화재",year:2020,date:"2020.04.29.",title:"이천 한익스프레스 화재",cat:"산업재해",event:"38명 사망, 10명 부상. 발주처 지시로 공사 기한 단축·동시 작업. 안전조치·경보설비 미설치, 대피로 폐쇄.",issue:"2008년 이천 냉동창고 화재와 동일 유형 12년 만에 반복.",civil:"시민사회단체 현장 방문. 이천시는 발주처 책임 적극 제기.",result:"2021년 11월 발주업체 관계자 무죄 확정. 중대재해처벌법 논의 가속화.",links:[{label:"주간안전 자료",url:"https://weeklysafety.blogspot.com/2023/04/blog-post_29.html"}],related:["2022-중대재해법"]},
+{id:"2020-기후위기",year:2020,date:"2020.06~08.",title:"기후위기 재난: 최장 장마·수해",cat:"재난",event:"최장 54일 장마로 전국 수해 피해. 수해 지역 이재민 중 이주노동자 다수. 비닐하우스 이주민 비적정 숙소 현주소 드러남.",issue:"기후위기 재난이 사회적 약자·취약계층에게 더 큰 위협.",civil:"피해자 지원을 넘어 일상의 안전을 구축할 제도적 방안 모색.",result:"생명안전기본법 발의(2020.11.) — 제정으로는 이어지지 못함.",links:[{label:"생명안전기본법 관련",url:"https://weeklysafety.blogspot.com/2020/11/blog-post_13.html"}],related:["2022-울진산불","2025-경북산불"]},
+{id:"2020-이주노동자속헹",year:2020,date:"2020.12.",title:"이주노동자 속헹 씨 비닐하우스 사망",cat:"산업재해",event:"경기도 포천 농장 비닐하우스 숙소에서 사망. 기온 영하 18도, 난방 미작동. 적절한 보호와 치료 받지 못한 채 사망.",issue:"이주노동자의 열악한 주거 환경이 노동 조건의 일부임에도 관리 부재.",civil:"유가족·시민사회가 국가 책임 법적 대응. 2022년 5월 산재 인정, 9월 국가 상대 손해배상 소송.",result:"2026년 1월 대법원 정부 배상 판결 확정.",links:[],related:["2024-아리셀","2025-이주노동자뚜안"]},
+{id:"2021-중대재해법제정",year:2021,date:"2021.01.26.",title:"중대재해처벌법 제정",cat:"입법/정책",event:"반복되는 산업재해·시민재해에 대한 사회적 책임 강화를 위한 법. 경영책임자의 형사책임 명문화. 2022년 1월 27일부터 시행.",issue:"5인 미만 사업장 적용 제외 등 한계 논쟁.",civil:"세월호·구의역·김용균 유가족, 노동계, 시민사회 연대의 결실. 13년 기업처벌강화 투쟁의 성과.",result:"2022년 1월 27일 시행. 경영책임자 형사처벌 조항 최초 법제화.",links:[{label:"국가법령정보센터",url:"https://www.law.go.kr"}],related:["2018-김용균","2022-중대재해법"]},
+{id:"2021-피해자권리",year:2021,date:"2021.04.",title:"재난 피해자 권리 매뉴얼 발간",cat:"운동/조직",event:"재난 피해자의 개념을 정의하고 권리가 있음을 알리며 가이드라인 제시. 2017년 세월호참사 유가족·생존자 가족·민간잠수사 등의 증언에서 출발.",issue:"피해자 권리를 중심으로 요구하는 방식 확장. 제도적 측면으로의 세분화는 아직 미흡한 시기.",civil:"세월호에서 시작된 피해자 권리 논의가 권리 매뉴얼로 1차 정리.",result:"이후 참사 피해자 권리 운동의 기초 문서로 활용.",links:[{label:"4.16재단 자료",url:"https://416foundation.org/notice/news/?mod=document&uid=730"}],related:["2014-세월호","2022-이태원"]},
+{id:"2021-광주학동",year:2021,date:"2021.06.09.",title:"광주 학동 재개발 건물 붕괴",cat:"재난",event:"광주 동구 학동4구역 철거 중 빌딩 붕괴로 시내버스를 덮쳐 9명 사망, 8명 부상. 짬짜미 재하도급·날림 철거·안전 관리 허점.",issue:"재하도급 구조와 안전 관리 부실.",civil:"사건 1주일 후 유가족협의회 구성, 광주지역 시민사회대책위 결성.",result:"9월 합의.",links:[],related:["2022-중대재해법"]},
+{id:"2022-중대재해법",year:2022,date:"2022.01.27.",title:"중대재해처벌법 시행",cat:"입법/정책",event:"2021년 제정된 중대재해처벌법 1월 27일부터 시행.",issue:"5인 미만 사업장 제외. 처벌 수위·적용 범위 지속 논쟁.",civil:"이후 실제 적용과 처벌 실효성 모니터링 지속.",result:"경영책임자 형사처벌 조항 최초 시행.",links:[{label:"국가법령정보센터",url:"https://www.law.go.kr"}],related:["2021-중대재해법제정","2024-아리셀"]},
+{id:"2022-울진산불",year:2022,date:"2022.03.04.",title:"울진-삼척 산불",cat:"재난",event:"9일간 경북 울진·강원 삼척 산불. 213시간 43분 만에 진화. 1986년 이후 '가장 오래 지속된 산불' 기록.",issue:"기후위기 인식 확산. 피해지원 불평등. 농어촌·노인 취약계층 대피 어려움.",civil:"기후위기로 인한 재난이라는 인식 확산.",result:"이후 반복 산불에서 동일 문제 반복.",links:[],related:["2020-기후위기","2025-경북산불"]},
+{id:"2022-반지하",year:2022,date:"2022.08.",title:"수도권 집중호우 반지하 참사",cat:"재난",event:"서울 시간당 100mm 이상 폭우. 반지하 주택 침수로 3명 사망.",issue:"기후위기와 비적정 주거의 결합.",civil:"반지하 참사 대응 시민사회 네트워크 발족.",result:"취약계층 주거 안전 개선 요구.",links:[],related:["2020-기후위기"]},
+{id:"2022-이태원",year:2022,date:"2022.10.29.",title:"이태원 참사",cat:"재난",event:"서울 용산구 이태원에서 핼러윈 인파 압사로 159명 사망. 이른 저녁부터 압사 위험 시민 제보가 있었으나 대응 부재.",issue:"군중 안전 관리 부재. 국가 책임. 참사 축소 시도 비판.",civil:"참사 1달여 만에 유가족협의회 구성, 시민대책회의 결성. 이태원 녹사평 광장 분향소 설치. 세월호 운동 경험 계승.",result:"이태원참사특별법 제정 운동. 10·29 이태원참사 특별조사위원회 출범.",links:[{label:"10.29 이태원참사 시민대책회의",url:"https://1029.kr"}],related:["2014-세월호","2023-이태원특별법운동"]},
+{id:"2023-생명안전동행",year:2023,date:"2023.05.",title:"생명안전기본법 제정 시민 동행 결성",cat:"운동/조직",event:"세월호 참사 이후 반복되는 재난의 고리를 끊기 위해 참사 피해자 가족들과 시민사회가 결성. 안전을 국가의 '시혜'가 아닌 국민의 '기본적 권리'로 선언. 2023년 9월 5만 명 국민동의청원 국회 제출 → 21대 국회 임기 만료로 폐기.",issue:"안전권의 기본권 선언 필요.",civil:"2024년 22대 국회 77명 의원과 법안 재발의. 2026년 4월 세월호 12주기 내 통과 목표로 국회 앞 무기한 농성.",result:"22대 국회 77인 의원 공동 발의. 입법 운동 지속 중.",links:[],related:["2014-세월호","2022-이태원"]},
+{id:"2023-오송",year:2023,date:"2023.07.15.",title:"오송 지하차도 참사",cat:"재난",event:"미호강 임시 제방 붕괴로 궁평2지하차도 강물 유입. 사전 교통통제 권고 및 112 신고가 있었으나 충청북도·청주시 도로 통제 미이행. 14명 사망, 16명 부상.",issue:"사전 경고에도 도로 통제 미이행. 행정기관 부실 대응.",civil:"7.26. 유가족협의회 결성. 7.27. 시민대책위 발족. 2024년 4월 시민사회 자체 '오송참사시민진상조사위원회' 구성·보고서 발간.",result:"2025년 1월 청주시장 등 3인 중대재해처벌법(시민재해) 위반 불구속 기소 — 중대재해처벌법 시행 이후 중대시민재해 첫 기소 사례.",links:[],related:["2022-이태원","2022-중대재해법"]},
+{id:"2023-재난참사피해자연대",year:2023,date:"2023.12.16.",title:"재난참사피해자연대 발족",cat:"운동/조직",event:"서로 다른 재난을 겪었지만 '같은 아픔을 경험했다'는 공감에서 출발. 고립되기 쉬운 피해자들이 서로의 존재를 확인하며 다시 목소리를 낼 수 있도록 용기를 북돋음.",issue:"각 참사에서 해결되지 않은 과제들의 공동 설정.",civil:"조사 체계 개편·특별법 대응·수습 문제 등 주요 쟁점 공동 대응.",result:"부천화재참사·제주항공 참사 유가족 결합. 재난피해자 권리보장 조례 제정 운동으로 연결.",links:[],related:["2022-이태원","2024-부천화재"]},
+{id:"2023-이태원특별법운동",year:2023,date:"2023",title:"이태원참사 특별법 제정 운동",cat:"운동/조직",event:"이태원 참사 유가족·생존자·시민단체가 진상규명과 책임자 처벌, 피해자 지원 특별법 제정 요구. 국회 앞 농성·서명 운동.",issue:"세월호 운동 경험 계승. 피해자가 주체적으로 입법 운동을 전개하는 구조 정착.",civil:"재난 참사 대응의 시민 주도 모델 자리잡음.",result:"이태원참사특별법 제정. 10·29 이태원참사 특별조사위원회 출범.",links:[{label:"10.29 이태원참사 시민대책회의",url:"https://1029.kr"}],related:["2022-이태원","2014-세월호"]},
+{id:"2024-아리셀",year:2024,date:"2024.06.24.",title:"아리셀 중대재해 참사",cat:"산업재해",event:"경기도 화성 리튬배터리 제조업체 화재로 23명 사망(18명이 이주노동자), 8명 부상. 탈출구 인근 배터리 적재로 대피 불가.",issue:"이주노동자·비정규직에게 위험을 전가한 구조적 재난. 불법파견·비정규직 차별 등 산업 전반의 구조적 문제.",civil:"유가족·시민사회가 구조적 재난으로 규정. 고용노동부 전국 229개소 특별감독 → 948건 위반 확인.",result:"1심: 대표 징역 15년. 항소심(2026.04.22.): 대표 징역 4년으로 감형 → 법 실효성 한계 지적.",links:[],related:["2022-중대재해법","2020-이주노동자속헹"]},
+{id:"2024-부천화재",year:2024,date:"2024.08.22.",title:"부천화재참사",cat:"재난",event:"경기도 부천 호텔 화재로 7명 사망, 12명 부상. 화재경보 울렸으나 직원이 차단, 2분 24초 대피 지연. 도어클로저 미설치로 연기·화염 급속 확산.",issue:"기본 설비 안전 관리 부재. 국가·지자체 '국민 보호 의무' 책임 쟁점.",civil:"49재 시민추모제. 재난참사피해자연대 결합 후 부천시 재난피해자 인권보장 조례 제정 운동 시작.",result:"형사재판 진행 중(2026.04.08. 13차 공판). 2025년 10월 국가 상대 손해배상 소송 제기.",links:[],related:["2023-재난참사피해자연대"]},
+{id:"2024-제주항공",year:2024,date:"2024.12.29.",title:"무안공항 제주항공 여객기 참사",cat:"재난",event:"무안국제공항 제주항공 여객기 사고로 179명 희생. 조사기구 국토교통부 산하 구조로 독립성 논란. 수습 99% 완료 발표 후 유해·유류품 추가 발견.",issue:"조사기구 독립성 구조적 한계. 조종사 과실 발표 시도 → 유가족 문제 제기로 무산.",civil:"참사 초기 유가족 중심 대응. 1주기 앞두고 외부 자문위원회 구성하며 시민사회와 연대.",result:"항공철도사고조사법 개정으로 국무총리 산하 이관 추진.",links:[],related:["2014-세월호","2023-재난참사피해자연대"]},
+{id:"2025-경북산불",year:2025,date:"2025.03.22.",title:"경북 초대형 산불",cat:"재난",event:"경북 의성에서 발화, 안동·청송·영양·영덕으로 급속 확산. 149시간 지속, 대한민국 역사상 최대 규모 산불 피해.",issue:"응답자 약 70%가 보상금 기준 모름, 80% 이상이 산불특별법 미이해. 주거·생계·정신건강 '3중고'.",civil:"피해 주민 대책위 구성. 실질 보상·특별법 제정 요구. 시민사회 피해자 실태조사.",result:"피해자의 알 권리·참여권 보장, 삶의 회복까지 지원하는 재난 대응 체계 전환 요구.",links:[],related:["2022-울진산불","2020-기후위기"]},
+{id:"2025-SPC",year:2025,date:"2025.05.19.",title:"SPC 산재 사망사고",cat:"산업재해",event:"경기도 시흥 SPC삼립 시화공장에서 50대 노동자가 컨베이어 설비에 끼여 사망. SPC그룹에서 2022·2023·2025년 세 차례 기계 끼임 사망사고 반복.",issue:"안전장치 미설치·위험구역 관리 부실. 끼임 사망사고 반복.",civil:"반복 사고에 따른 안전관리 구조 문제 제기.",result:"사후 안전장치 설치 대책 발표 — 사전 조치 가능했다는 비판.",links:[],related:["2018-김용균","2022-중대재해법"]},
+{id:"2025-김충현",year:2025,date:"2025.06.",title:"태안화력 김충현 비정규직 사망",cat:"산업재해",event:"태안화력발전소 하청 비정규직 노동자 김충현 씨가 홀로 설비 점검 중 사망. 2인 1조 원칙 미이행. 2018년 김용균 사고 이후 약속된 개선이 현장에서 이행되지 않음.",issue:"위험의 외주화 지속. 원청 책임 회피. 반복되는 구조.",civil:"대책위 구성 후 직접고용 합의 이행 촉구.",result:"한전KPS 하청노동자 직접고용 합의 이행 지연.",links:[],related:["2018-김용균"]},
+{id:"2025-이주노동자뚜안",year:2025,date:"2025.10./2026.03.",title:"이주노동자 두 '뚜안'의 죽음",cat:"산업재해",event:"2025년 10월 유학생 신분 뚜안 씨가 단속 피해 3층에서 추락 사망. 2026년 3월 경기도 이천 자갈공장 뚜안 씨가 컨베이어벨트에 끼여 사망.",issue:"'위험의 이주화'. 비자 제한·불안정 체류 구조로 위험 노출.",civil:"컨베이어 사고 사측이 '내국인과 차별 없는 수준의 배·보상과 공식 사과, 재발방지 합의' — 본국 임금 기준 적용 관행을 넘어선 사례.",result:"2026년 2월 단속 피하다 발생한 사망을 업무상 재해로 인정.",links:[],related:["2024-아리셀","2020-이주노동자속헹"]},
+{id:"2025-이태원소방관",year:2025,date:"2025.07~08.",title:"이태원 구조 소방관 희생자 추가 인정",cat:"운동/조직",event:"이태원 참사 구조 소방관 2명이 트라우마에 시달리다 2025년 7~8월 사망. 한 명은 공무상 요양 승인 불가 상태에서 질병 휴직 중 사망.",issue:"재난 대응 인력에 대한 심리적 지원과 제도적 보호 미작동.",civil:"재난 구조 인력도 참사의 피해자임을 인정하는 요구.",result:"2026년 4월 특조위가 소방관 2명을 희생자로 인정·조사 포함 의결. 특조위 조사 대상 총 161명.",links:[],related:["2022-이태원"]},
+{id:"2025-한솔제지",year:2025,date:"2025.07.16.",title:"한솔제지 사망사고",cat:"산업재해",event:"대전 신탄진공장에서 입사 한 달 된 30대 신입 노동자가 기계 내부로 추락해 사망. 방호장치 미설치, 사고 후 10시간 이상 행방 파악 못함.",issue:"방호장치 미설치·신입 노동자 위험 공정 투입. 반복된 사망사고.",civil:"압수수색을 통한 책임 규명. 안전관리 체계 개선 요구.",result:"2026년 1월 노동청이 대표를 중대재해처벌법 위반, 공장장을 산안법 위반으로 검찰 송치.",links:[],related:["2022-중대재해법","2025-SPC"]},
+];
+
+const CONNS = [
+  {id:"c1",fromYear:2014,toYear:2018,label:"피해자 입법 주체화 모델",desc:"세월호 유가족이 직접 특별법 제정을 요구하며 광화문 농성을 이끈 경험이, 구의역·김용균·이태원 운동에서 반복·계승됨. 피해자가 운동 주체가 되는 모델의 정착."},
+  {id:"c2",fromYear:2016,toYear:2019,label:"'위험의 외주화' 의제화",desc:"구의역 컵라면 추모에서 시작된 '혼자 일하다 죽는 노동자' 담론이 김용균 사고로 정점에 달하며 중대재해처벌법 입법 운동으로 수렴."},
+  {id:"c3",fromYear:2018,toYear:2022,label:"반복 참사 → 중대재해처벌법",desc:"김용균·이천 화재 등 반복 참사가 이어지며 경영자 형사 처벌 조항 입법화 요구가 결집. 13년 기업처벌강화 투쟁이 2022년 중대재해처벌법 시행으로 결실."},
+  {id:"c4",fromYear:2022,toYear:2025,label:"세월호 모델 계승·피해자연대",desc:"이태원 참사 대응에서 세월호 운동의 조직 경험·입법 전략이 직접 활용됨. 재난참사피해자연대 결성으로 피해자들이 연대하며 '피해자운동'의 주체성 선언."},
+  {id:"c5",fromYear:2020,toYear:2025,label:"기후·이주 재난의 복합화",desc:"코로나19·수해·산불 등 기후위기 재난과 이주노동자 죽음이 반복되며 '누가 더 위험에 노출되는가'라는 질문이 운동 의제로 부상."},
+];
+
+// ─────────────────────────────────────────────
+// 앱 로직
+// ─────────────────────────────────────────────
+const CAT_CLS = {'재난':'재난','산업재해':'산업재해','운동/조직':'운동','입법/정책':'입법'};
+let activeFilter = '전체', searchQ = '', editMode = false, currentId = null, editingId = null;
+
+function dotClass(cat) { return CAT_CLS[cat] || '운동'; }
+
+function getFiltered() {
+  return EVENTS.filter(e => {
+    const mc = activeFilter === '전체' || e.cat === activeFilter;
+    const ms = !searchQ || [e.title,e.event,e.issue,e.civil,e.result].some(t => t && t.includes(searchQ));
+    return mc && ms;
+  });
+}
+
+function updateStats() {
+  const f = getFiltered();
+  document.getElementById('st-total').textContent = EVENTS.length;
+  document.getElementById('st-show').textContent = f.length;
+  document.getElementById('st-재난').textContent = EVENTS.filter(e=>e.cat==='재난').length;
+  document.getElementById('st-산업재해').textContent = EVENTS.filter(e=>e.cat==='산업재해').length;
+  document.getElementById('st-운동').textContent = EVENTS.filter(e=>e.cat==='운동/조직').length;
+  document.getElementById('st-입법').textContent = EVENTS.filter(e=>e.cat==='입법/정책').length;
+}
+
+function render() {
+  const body = document.getElementById('tl-body');
+  const filtered = getFiltered();
+  updateStats();
+  if (!filtered.length) { body.innerHTML = '<div class="empty-msg">검색 결과가 없습니다</div>'; return; }
+
+  const byYear = {};
+  filtered.forEach(e => { if (!byYear[e.year]) byYear[e.year] = []; byYear[e.year].push(e); });
+  body.innerHTML = '';
+
+  Object.keys(byYear).sort((a,b)=>+a-+b).forEach(yr => {
+    const grp = document.createElement('div');
+    grp.className = 'yr-group';
+    grp.dataset.yr = yr;
+
+    const hd = document.createElement('div');
+    hd.className = 'yr-heading';
+    hd.textContent = yr + '년';
+    grp.appendChild(hd);
+
+    byYear[yr].forEach((e, ei) => {
+      const row = document.createElement('div');
+      row.className = 'ev-row';
+      const isLast = ei === byYear[yr].length - 1;
+      const dc = dotClass(e.cat);
+      row.innerHTML = `
+        <div class="yr-dot-col">
+          <div class="dot ${dc}"></div>
+          ${!isLast ? '<div class="yr-vline"></div>' : ''}
+        </div>
+        <div class="ev-cell">
+          <div class="ev-main ${dc}" data-id="${e.id}">
+            <div class="ev-title">${e.title}</div>
+            <div class="ev-date">${e.date}</div>
+            <div class="ev-more">▶ 자세히 보기</div>
+          </div>
+        </div>
+        <div class="ev-cell"><div class="ev-snippet">${trim(e.issue,72)}</div></div>
+        <div class="ev-cell"><div class="ev-snippet">${trim(e.civil,72)}</div></div>
+        <div class="ev-cell"><div class="ev-snippet">${trim(e.result,72)}</div></div>`;
+      grp.appendChild(row);
+    });
+
+    if (editMode) {
+      const addBtn = document.createElement('button');
+      addBtn.className = 'add-btn';
+      addBtn.textContent = `+ ${yr}년에 새 사건 추가`;
+      addBtn.addEventListener('click', () => openNewForm(+yr));
+      grp.appendChild(addBtn);
+    }
+    body.appendChild(grp);
+  });
+
+  if (editMode) {
+    const globalAdd = document.createElement('button');
+    globalAdd.className = 'add-btn';
+    globalAdd.style.cssText = 'margin:14px 0;border-style:solid;font-weight:700;';
+    globalAdd.textContent = '+ 새 사건 추가 (연도 직접 입력)';
+    globalAdd.addEventListener('click', () => openNewForm(null));
+    body.appendChild(globalAdd);
+  }
+
+  body.querySelectorAll('.ev-main[data-id]').forEach(card => {
+    card.addEventListener('click', () => openViewPanel(card.dataset.id));
+  });
+
+  // 연결선 버튼
+  setTimeout(() => {
+    CONNS.forEach(conn => {
+      const fg = body.querySelector(`.yr-group[data-yr="${conn.fromYear}"]`);
+      const tg = body.querySelector(`.yr-group[data-yr="${conn.toYear}"]`);
+      if (!fg || !tg) return;
+      const br = body.getBoundingClientRect();
+      const midY = ((fg.getBoundingClientRect().bottom + tg.getBoundingClientRect().top) / 2) - br.top;
+      const btn = document.createElement('button');
+      btn.className = 'conn-btn';
+      btn.textContent = '↕ ' + conn.label;
+      btn.style.top = midY + 'px';
+      btn.addEventListener('click', () => openConnPanel(conn.id));
+      body.appendChild(btn);
+    });
+  }, 200);
+}
+
+function trim(s, n) {
+  if (!s) return '';
+  return s.length > n ? s.substring(0, n) + '…' : s;
+}
+
+function openViewPanel(id) {
+  currentId = id;
+  const e = EVENTS.find(x => x.id === id);
+  if (!e) return;
+  showView();
+  document.getElementById('pb').textContent = e.cat;
+  document.getElementById('pt').textContent = e.title;
+  document.getElementById('pd').textContent = e.date;
+  document.getElementById('pe').textContent = e.event || '';
+  document.getElementById('pi').textContent = e.issue || '';
+  document.getElementById('ps').textContent = e.civil || '';
+  document.getElementById('pr').textContent = e.result || '';
+  const pl = document.getElementById('pl');
+  pl.innerHTML = (e.links || []).map(l =>
+    `<a class="p-link" href="${l.url}" target="_blank" rel="noopener"><span class="p-link-icon">🔗</span>${l.label}</a>`
+  ).join('');
+  document.getElementById('pl-sec').style.display = (e.links && e.links.length) ? 'flex' : 'none';
+  document.getElementById('prt').innerHTML = (e.related || []).map(r =>
+    `<button class="rtag" onclick="searchBy('${r}')">${r}</button>`
+  ).join('');
+  document.getElementById('panel-actions').style.display = editMode ? 'flex' : 'none';
+  document.getElementById('panel').classList.add('open');
+}
+
+function openConnPanel(id) {
+  const c = CONNS.find(x => x.id === id);
+  if (!c) return;
+  showView();
+  document.getElementById('pb').textContent = '운동 흐름';
+  document.getElementById('pt').textContent = c.label;
+  document.getElementById('pd').textContent = c.fromYear + ' → ' + c.toYear + '년';
+  document.getElementById('pe').textContent = c.desc;
+  ['pi','ps','pr'].forEach(id => document.getElementById(id).textContent = '');
+  document.getElementById('pl-sec').style.display = 'none';
+  document.getElementById('prt').innerHTML = '';
+  document.getElementById('panel-actions').style.display = 'none';
+  document.getElementById('panel').classList.add('open');
+}
+
+function showView() {
+  document.getElementById('view-mode').style.display = 'flex';
+  document.getElementById('edit-mode').style.display = 'none';
+}
+function showEditForm() {
+  document.getElementById('view-mode').style.display = 'none';
+  document.getElementById('edit-mode').style.display = 'flex';
+}
+
+function openNewForm(yr) {
+  editingId = null;
+  ['ef-year','ef-date','ef-title','ef-event','ef-issue','ef-civil','ef-result','ef-related'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  if (yr) document.getElementById('ef-year').value = yr;
+  document.getElementById('ef-cat').value = '재난';
+  renderLinkInputs([]);
+  document.getElementById('pb').textContent = '새 사건 추가';
+  document.getElementById('pt').textContent = '';
+  document.getElementById('pd').textContent = '';
+  showEditForm();
+  document.getElementById('panel').classList.add('open');
+}
+
+function openEditForm(id) {
+  editingId = id;
+  const e = EVENTS.find(x => x.id === id);
+  if (!e) return;
+  document.getElementById('ef-year').value = e.year;
+  document.getElementById('ef-date').value = e.date || '';
+  document.getElementById('ef-title').value = e.title || '';
+  document.getElementById('ef-cat').value = e.cat || '재난';
+  document.getElementById('ef-event').value = e.event || '';
+  document.getElementById('ef-issue').value = e.issue || '';
+  document.getElementById('ef-civil').value = e.civil || '';
+  document.getElementById('ef-result').value = e.result || '';
+  document.getElementById('ef-related').value = (e.related || []).join(', ');
+  renderLinkInputs(e.links || []);
+  showEditForm();
+}
+
+function renderLinkInputs(links) {
+  const wrap = document.getElementById('ef-links-wrap');
+  wrap.innerHTML = '';
+  links.forEach((l, i) => {
+    const div = document.createElement('div');
+    div.className = 'link-item';
+    div.innerHTML = `
+      <input class="ef-input" placeholder="자료 이름" value="${escHtml(l.label||'')}" data-li="${i}" data-f="label">
+      <input class="ef-input" placeholder="https://..." value="${escHtml(l.url||'')}" data-li="${i}" data-f="url">
+      <button type="button" class="link-del-btn" data-li="${i}">✕</button>`;
+    wrap.appendChild(div);
+  });
+  wrap.querySelectorAll('.link-del-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cur = getLinkInputs();
+      cur.splice(+btn.dataset.li, 1);
+      renderLinkInputs(cur);
+    });
+  });
+}
+
+function getLinkInputs() {
+  const inputs = document.getElementById('ef-links-wrap').querySelectorAll('input');
+  const links = [];
+  for (let i = 0; i < inputs.length; i += 2) {
+    links.push({ label: inputs[i].value, url: inputs[i+1] ? inputs[i+1].value : '' });
+  }
+  return links;
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,5); }
+
+// 이벤트 바인딩
+document.getElementById('add-link-btn').addEventListener('click', () => {
+  const cur = getLinkInputs();
+  cur.push({ label: '', url: '' });
+  renderLinkInputs(cur);
+});
+
+document.getElementById('save-btn').addEventListener('click', () => {
+  const yr = +document.getElementById('ef-year').value;
+  const title = document.getElementById('ef-title').value.trim();
+  if (!yr || !title) { alert('연도와 사건명은 필수입니다.'); return; }
+  const newEv = {
+    id: editingId || (yr + '-' + uid()),
+    year: yr,
+    date: document.getElementById('ef-date').value,
+    title,
+    cat: document.getElementById('ef-cat').value,
+    event: document.getElementById('ef-event').value,
+    issue: document.getElementById('ef-issue').value,
+    civil: document.getElementById('ef-civil').value,
+    result: document.getElementById('ef-result').value,
+    links: getLinkInputs().filter(l => l.label || l.url),
+    related: document.getElementById('ef-related').value.split(',').map(s=>s.trim()).filter(Boolean),
+  };
+  if (editingId) {
+    const idx = EVENTS.findIndex(e => e.id === editingId);
+    if (idx >= 0) EVENTS[idx] = newEv;
+  } else {
+    EVENTS.push(newEv);
+    EVENTS.sort((a,b) => a.year - b.year);
+  }
+  document.getElementById('panel').classList.remove('open');
+  render();
+});
+
+document.getElementById('edit-this-btn').addEventListener('click', () => openEditForm(currentId));
+
+document.getElementById('del-this-btn').addEventListener('click', () => {
+  if (!confirm('이 사건을 삭제할까요?')) return;
+  EVENTS = EVENTS.filter(e => e.id !== currentId);
+  document.getElementById('panel').classList.remove('open');
+  render();
+});
+
+document.getElementById('cancel-edit-btn').addEventListener('click', () => {
+  if (currentId) openViewPanel(currentId);
+  else document.getElementById('panel').classList.remove('open');
+});
+
+document.getElementById('pc').addEventListener('click', () => {
+  document.getElementById('panel').classList.remove('open');
+});
+
+document.getElementById('edit-toggle').addEventListener('click', () => {
+  editMode = !editMode;
+  const btn = document.getElementById('edit-toggle');
+  btn.textContent = editMode ? '✅ 편집 모드 ON' : '✏️ 편집 모드';
+  btn.classList.toggle('edit-on', editMode);
+  document.getElementById('panel-actions').style.display =
+    (editMode && currentId) ? 'flex' : 'none';
+  render();
+});
+
+document.getElementById('exp-btn').addEventListener('click', () => {
+  const json = JSON.stringify(EVENTS, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'safety_timeline_events.json'; a.click();
+  URL.revokeObjectURL(url);
+});
+
+document.querySelectorAll('.fbtn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    activeFilter = btn.dataset.f;
+    document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    render();
+  });
+});
+
+document.getElementById('srch').addEventListener('input', e => {
+  searchQ = e.target.value.trim();
+  render();
+});
+
+window.searchBy = function(q) {
+  document.getElementById('srch').value = q;
+  searchQ = q;
+  document.getElementById('panel').classList.remove('open');
+  render();
+};
+
+// 초기 렌더
+render();
+</script>
+</body>
+</html>
