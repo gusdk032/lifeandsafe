@@ -287,8 +287,7 @@ body{font-family:var(--sans);background:var(--white);color:var(--black);line-hei
         </div>
         <div class="ef-row">
           <label class="ef-label">날짜 표기</label>
-          <input class="ef-input" id="ef-date" placeholder="예: 2024.04.16.">
-          <span class="ef-hint">형식: YYYY.MM.DD. / YYYY.MM. / 연도만 / 기간(06~08)</span>
+          <input class="ef-input" id="ef-date" type="date">
         </div>
       </div>
       <div class="ef-row">
@@ -743,6 +742,8 @@ function runMigration() {
   EVENTS.forEach(migrateEvent);
   // 헤더행·무효 데이터 제거
   EVENTS = EVENTS.filter(e => !e._skip && +e.year > 1900 && e.title && e.title !== 'title');
+  // 날짜를 YYYY-MM-DD 형식으로 통일
+  EVENTS.forEach(e => { e.date = parseToISODate(e.date); });
   // 연도 정렬
   EVENTS.sort((a,b) => a.year - b.year);
 }
@@ -777,6 +778,25 @@ function updateStats(){
   document.getElementById('st-입법').textContent=EVENTS.filter(e=>getCats(e).includes('입법/정책')).length;
 }
 
+function parseToISODate(d){
+  if(!d)return'';
+  if(/^\d{4}-\d{2}-\d{2}$/.test(d))return d;
+  const m1=d.match(/^(\d{4})\.(\d{2})\.(\d{2})/);
+  if(m1)return m1[1]+'-'+m1[2]+'-'+m1[3];
+  const m2=d.match(/^(\d{4})\.(\d{2})/);
+  if(m2)return m2[1]+'-'+m2[2]+'-01';
+  const m3=d.match(/^(\d{4})/);
+  if(m3)return m3[1]+'-01-01';
+  return '';
+}
+function fmtDate(d){
+  if(!d)return'';
+  const m=d.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if(!m)return d;
+  if(m[3]==='01'&&m[2]==='01')return m[1]+'년';
+  if(m[3]==='01')return m[1]+'.'+m[2]+'.';
+  return m[1]+'.'+m[2]+'.'+m[3]+'.';
+}
 function trim(s,n){ if(!s)return''; return s.length>n?s.substring(0,n)+'…':s; }
 
 function render(){
@@ -841,7 +861,7 @@ function render(){
           <div class="ev-main ${dc}" data-id="${e.id}">
             <div class="ev-title">${e.title}</div>
             <div style="margin:3px 0 4px;">${catTags}</div>
-            <div class="ev-date">${e.date||''}</div>
+            <div class="ev-date">${fmtDate(e.date)}</div>
             <div class="ev-more">▶ 자세히 보기</div>
           </div>
         </div>
@@ -955,7 +975,7 @@ function openViewPanel(id,focus){
   showView();
   document.getElementById('pb').innerHTML=getCats(e).map(c=>`<span class="cat-tag ${catCls(c)}" style="font-size:11px;">${CAT_LABEL[c]||c}</span>`).join('');
   document.getElementById('pt').textContent=e.title;
-  document.getElementById('pd').textContent=e.date||'';
+  document.getElementById('pd').textContent=fmtDate(e.date);
   document.getElementById('pe').textContent=e.event||'';
   document.getElementById('pi').textContent=e.issue||'';
   document.getElementById('ps').textContent=e.civil||'';
