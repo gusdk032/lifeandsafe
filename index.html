@@ -208,6 +208,7 @@ body{font-family:var(--sans);background:var(--white);color:var(--black);line-hei
     </div>
     <div class="toolbar-right">
       <button class="tbtn" id="edit-toggle">✏️ 편집 모드</button>
+      <button class="tbtn sheet-btn" id="sheet-load-btn" style="display:none;">📥 시트에서 불러오기</button>
       <button class="tbtn sheet-btn" id="sheet-save-btn" style="display:none;">☁️ 시트에 저장</button>
       <button class="tbtn export" id="exp-btn">↓ JSON 저장</button>
     </div>
@@ -1309,6 +1310,7 @@ document.getElementById('edit-toggle').addEventListener('click',async()=>{
   btn.textContent=editMode?'✅ 편집 모드 ON':'✏️ 편집 모드';
   btn.classList.toggle('edit-on',editMode);
   document.getElementById('sheet-save-btn').style.display=editMode?'block':'none';
+  document.getElementById('sheet-load-btn').style.display=editMode?'block':'none';
   document.getElementById('panel').classList.remove('open');
   document.getElementById('panel-actions').style.display='none';
   if(!editMode){
@@ -1320,9 +1322,11 @@ document.getElementById('edit-toggle').addEventListener('click',async()=>{
 });
 
 document.getElementById('sheet-save-btn').addEventListener('click',saveToSheet);
+document.getElementById('sheet-load-btn').addEventListener('click',loadFromSheet);
 
-// 초기 실행
-loadFromSheet();
+// 초기 실행: 시트 자동로드 제거 — 하드코딩된 EVENTS를 기본으로 사용
+runMigration();
+render();
 </script>
 </body>
 </html>
