@@ -748,7 +748,8 @@ function runMigration() {
   EVENTS = EVENTS.filter(e => !e._skip && +e.year > 1900 && e.title && e.title !== 'title');
   // 날짜를 YYYY-MM-DD 형식으로 통일
   EVENTS.forEach(e => {
-    e.date2 = e.date2 || parseEndISODate(e.date);
+    const rawDate2 = e.date2;
+    e.date2 = rawDate2 ? parseToISODate(rawDate2) : parseEndISODate(e.date);
     e.date = parseToISODate(e.date);
     if(!e.articles)e.articles=[];
     if(!e.docs)e.docs=[];
